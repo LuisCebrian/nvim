@@ -1,7 +1,6 @@
 syntax enable
 set noerrorbells
 set iskeyword+=_
-
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -14,16 +13,21 @@ set relativenumber
 set nowrap
 set noswapfile
 set nobackup
-
-"set undodir=~/.vim/undodir
-"set undofile
 set autoindent
 set incsearch
 set showmatch
 set cursorline
 set splitbelow
 set splitright
-
 set clipboard=unnamedplus "Use the same clipboard as system
-
 set colorcolumn=120
+
+" Coc settings
+set cmdheight=2 " Give more space for displaying messages.
+set updatetime=300
+set shortmess+=c " Don't pass messages to |ins-completion-menu|.
+set signcolumn=yes
+
+
+"set undodir=~/.vim/undodir
+"set undofile

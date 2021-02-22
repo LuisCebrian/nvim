@@ -4,7 +4,7 @@ set -o nounset    # error when referencing undefined variable
 set -o errexit    # exit when command fails
 
 movenewnvim() {
-    echo "Moving your config to nvim.old"
+    echo "Moving your config to nvim"
     cp -r . $HOME/.config/nvim
 }
 

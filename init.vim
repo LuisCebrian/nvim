@@ -9,3 +9,4 @@ source $HOME/.config/nvim/themes/nord.vim
 " Plugin Configuration
 luafile $HOME/.config/nvim/lua/telescope_config.lua
 source $HOME/.config/nvim/vimplug/settings/telescope.vim
+source $HOME/.config/nvim/vimplug/settings/coc.vim
