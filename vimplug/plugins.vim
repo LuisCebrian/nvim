@@ -18,6 +18,7 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 

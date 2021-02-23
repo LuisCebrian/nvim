@@ -28,6 +28,9 @@ set updatetime=300
 set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes
 
+" Airline settings
+set noshowmode
+set showtabline=2
 
 "set undodir=~/.vim/undodir
 "set undofile
