@@ -11,3 +11,4 @@ source $HOME/.config/nvim/themes/airline.vim
 luafile $HOME/.config/nvim/lua/telescope_config.lua
 source $HOME/.config/nvim/vimplug/settings/telescope.vim
 source $HOME/.config/nvim/vimplug/settings/coc.vim
+source $HOME/.config/nvim/vimplug/settings/gitgutter.vim
