@@ -23,6 +23,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
 
 call plug#end()
 
