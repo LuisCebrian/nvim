@@ -21,6 +21,8 @@ set splitbelow
 set splitright
 set clipboard=unnamedplus "Use the same clipboard as system
 set colorcolumn=120
+set scroll=10
+set scrolloff=3
 
 " Coc settings
 set cmdheight=2 " Give more space for displaying messages.
