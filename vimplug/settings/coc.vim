@@ -136,4 +136,5 @@ let g:coc_global_extensions = [
   \ 'coc-pyright',
   \ 'coc-omnisharp',
   \ 'coc-explorer',
+  \ 'coc-json',
   \ ]
