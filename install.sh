@@ -13,8 +13,14 @@ moveoldnvim() { \
     mv $HOME/.config/nvim $HOME/.config/nvim.old
 }
 
+installplugins() {
+    echo "Installing plugins..."
+    nvim --headless +PlugInstall +qall > /dev/null 2>&1
+}
 # Move old nvim config if it exists
+[ -d "$HOME/.config/nvim.old" ] && rm -rf ~/.config/nvim.old
 [ -d "$HOME/.config/nvim" ] && moveoldnvim
 
 # Copy this config 
 movenewnvim
+installplugins
