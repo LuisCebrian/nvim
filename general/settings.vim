@@ -25,7 +25,6 @@ set scroll=10
 set scrolloff=3
 
 " Coc settings
-set cmdheight=2 " Give more space for displaying messages.
 set updatetime=300
 set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes
@@ -34,5 +33,7 @@ set signcolumn=yes
 set noshowmode
 set showtabline=2
 
+"Tree
+set termguicolors
 "set undodir=~/.vim/undodir
 "set undofile

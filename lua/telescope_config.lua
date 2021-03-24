@@ -11,3 +11,17 @@ require('telescope').setup{
    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new
   }
 }
+
+
+M = {}
+
+-- Search git files and default to project files if not in git repository
+M.project_files = function(opts)
+  local opts = opts or {}
+  local ok = pcall(require'telescope.builtin'.git_files, opts)
+  if not ok then
+    require'telescope.builtin'.find_files(opts)
+  end
+end
+
+return M

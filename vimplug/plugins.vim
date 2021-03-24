@@ -11,13 +11,15 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'arcticicestudio/nord-vim'
 
-" Telescope dependencies
+"Explorer
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'kyazdani42/nvim-tree.lua'
+
+" Telescope dependencies
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
@@ -26,6 +28,10 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
 
 
 call plug#end()
