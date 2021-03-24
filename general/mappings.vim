@@ -29,6 +29,10 @@ nnoremap <silent> <S-TAB> :bprevious<CR>
 " Alternate way to save
 nnoremap <silent> <C-s> :w<CR>
 
+" Alternate way to close
+nnoremap <leader>q :q<CR>
+nnoremap <leader>bd :bd<CR>
+
 nnoremap <silent> <C-Up>    :resize -2<CR>
 nnoremap <silent> <C-Down>  :resize +2<CR>
 nnoremap <silent> <C-Left>  :vertical resize -2<CR>

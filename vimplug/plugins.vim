@@ -22,8 +22,11 @@ Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'tpope/vim-commentary'
 Plug 'vim-airline/vim-airline'
+
+" Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
 Plug 'jiangmiao/auto-pairs'
