@@ -26,6 +26,7 @@ Plug 'vim-airline/vim-airline'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-unimpaired'
 
 Plug 'ryanoasis/vim-devicons'
 Plug 'mhinz/vim-startify'
