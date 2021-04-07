@@ -37,3 +37,11 @@ set showtabline=2
 set termguicolors
 "set undodir=~/.vim/undodir
 "set undofile
+
+" If inside a git repo, auto save and auto read on branch change
+silent! !git rev-parse --is-inside-work-tree
+if v:shell_error == 0
+  set hidden
+  au FocusGained,BufEnter * :silent! !
+  au FocusLost,WinLeave,BufLeave * :silent! silent! w
+endif

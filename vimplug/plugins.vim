@@ -11,8 +11,9 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'arcticicestudio/nord-vim'
 
-"Explorer
+"Icons
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'ryanoasis/vim-devicons'
 Plug 'kyazdani42/nvim-tree.lua'
 
 " Telescope dependencies
@@ -20,18 +21,24 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+" Comments
 Plug 'tpope/vim-commentary'
+
+" Status bar
 Plug 'vim-airline/vim-airline'
 
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-unimpaired'
 
-Plug 'ryanoasis/vim-devicons'
-Plug 'mhinz/vim-startify'
+"Utilities
+Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'airblade/vim-rooter'
+
+" Project
+Plug 'mhinz/vim-startify'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
