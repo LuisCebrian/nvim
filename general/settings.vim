@@ -29,6 +29,9 @@ set updatetime=300
 set shortmess+=c " Don't pass messages to |ins-completion-menu|.
 set signcolumn=yes
 
+" Make visible tabs and trailing whitespaces
+set list listchars=tab:»·,trail:·
+
 " Airline settings
 set noshowmode
 set showtabline=2
