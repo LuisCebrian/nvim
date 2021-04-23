@@ -48,3 +48,6 @@ if v:shell_error == 0
   au FocusGained,BufEnter * :silent! !
   au FocusLost,WinLeave,BufLeave * :silent! silent! w
 endif
+
+" Don't insert comments for next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
