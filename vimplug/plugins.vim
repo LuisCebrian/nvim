@@ -9,7 +9,9 @@ endif
 
 call plug#begin(stdpath('data') . '/plugged')
 
+" Themes
 Plug 'arcticicestudio/nord-vim'
+Plug 'folke/tokyonight.nvim'
 
 "Icons
 Plug 'kyazdani42/nvim-web-devicons'
@@ -25,7 +27,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'tpope/vim-commentary'
 
 " Status bar
-Plug 'vim-airline/vim-airline'
+Plug 'hoob3rt/lualine.nvim'
 
 " Git
 Plug 'tpope/vim-fugitive'

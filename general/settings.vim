@@ -23,6 +23,7 @@ set clipboard=unnamedplus "Use the same clipboard as system
 set colorcolumn=120
 set scroll=10
 set scrolloff=3
+" set cmdheight=2
 
 " Coc settings
 set updatetime=300

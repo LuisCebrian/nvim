@@ -4,8 +4,8 @@ source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/mappings.vim
 
 " Themes
-source $HOME/.config/nvim/themes/nord.vim
-source $HOME/.config/nvim/themes/airline.vim
+source $HOME/.config/nvim/themes/tokyonight.vim
+luafile $HOME/.config/nvim/lua/themes/lualine.lua
 
 " Plugin Configuration
 luafile $HOME/.config/nvim/lua/telescope_config.lua
