@@ -29,6 +29,9 @@ Plug 'tpope/vim-commentary'
 " Status bar
 Plug 'hoob3rt/lualine.nvim'
 
+"Debug
+Plug 'puremourning/vimspector'
+
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
