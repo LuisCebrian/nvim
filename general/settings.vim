@@ -52,3 +52,14 @@ endif
 
 " Don't insert comments for next line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+" Toggle the quickfix list
+function! ToggleQuickFix()
+    if empty(filter(getwininfo(), 'v:val.quickfix'))
+        copen
+    else
+        cclose
+    endif
+endfunction
+
+nnoremap <silent> <F2> :call ToggleQuickFix()<cr>
