@@ -63,3 +63,10 @@ function! ToggleQuickFix()
 endfunction
 
 nnoremap <silent> <F2> :call ToggleQuickFix()<cr>
+
+" Change the name tab of tmux to the file edited in vim
+if exists('$TMUX')
+    let windowName = system("tmux display-message -p '#W'")
+    autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim:" . expand("%:t") . "'")
+    autocmd VimLeave * call system("tmux rename-window " . windowName)
+endif
