@@ -15,6 +15,7 @@ source $HOME/.config/nvim/vimplug/settings/start-screen.vim
 source $HOME/.config/nvim/vimplug/settings/nvim-tree.vim
 source $HOME/.config/nvim/vimplug/settings/fugitive.vim
 source $HOME/.config/nvim/vimplug/settings/vimspector.vim
+source $HOME/.config/nvim/vimplug/settings/easymotion.vim
 
 " LSP
 source $HOME/.config/nvim/vimplug/settings/lsp-config.vim
