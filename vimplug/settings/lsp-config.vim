@@ -7,3 +7,8 @@ nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
 
 autocmd CursorHold *.py :silent! lua vim.lsp.buf.document_highlight()
 autocmd CursorMoved *.py :silent! lua vim.lsp.buf.clear_references()
+
+call sign_define('LspDiagnosticsSignError',       { 'text': "", 'texthl': 'LspDiagnosticsSignError'       })
+call sign_define('LspDiagnosticsSignWarning',     { 'text': "", 'texthl': 'LspDiagnosticsSignWarning'     })
+call sign_define('LspDiagnosticsSignInformation', { 'text': "", 'texthl': 'LspDiagnosticsSignInformation' })
+call sign_define('LspDiagnosticsSignHint',        { 'text': "", 'texthl': 'LspDiagnosticsSignHint'        })
