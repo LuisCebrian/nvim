@@ -42,6 +42,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'airblade/vim-rooter'
 Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
 
 " Project
 Plug 'mhinz/vim-startify'
