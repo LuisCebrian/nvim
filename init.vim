@@ -22,3 +22,4 @@ source $HOME/.config/nvim/vimplug/settings/lsp-config.vim
 luafile $HOME/.config/nvim/lua/lsp/compe-config.lua
 luafile $HOME/.config/nvim/lua/lsp/python-lsp.lua
 luafile $HOME/.config/nvim/lua/lsp/vim-lsp.lua
+luafile $HOME/.config/nvim/lua/lsp/treesitter.lua
