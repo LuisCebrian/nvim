@@ -47,7 +47,7 @@ silent! !git rev-parse --is-inside-work-tree
 if v:shell_error == 0
   set hidden
   au FocusGained,BufEnter * :silent! !
-  au FocusLost,WinLeave,BufLeave * if &modified | silent! w | endif
+  au FocusLost,WinLeave,BufLeave,CursorHold * if &modified | silent! w | endif
 endif
 
 " Don't insert comments for next line
