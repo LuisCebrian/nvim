@@ -70,3 +70,9 @@ if exists('$TMUX')
     autocmd BufReadPost,FileReadPost,BufNewFile,BufEnter * call system("tmux rename-window 'vim:" . expand("%:t") . "'")
     autocmd VimLeave * call system("tmux rename-window " . windowName)
 endif
+
+" Remove trailing whitespaces
+function TrimWhiteSpace()
+  %s/\s*$//
+  ''
+endfunction
