@@ -83,8 +83,9 @@ function! Redir(cmd)
 
     new
     let w:scratch = 1
-    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile
+    setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile cc=
     call setline(1, split(output, "\n"))
+    setlocal noma
 endfunction
 
 command! -nargs=1 -complete=command Redir silent call Redir(<q-args>)
