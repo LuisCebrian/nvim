@@ -10,6 +10,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Better horizontal scroll
+nnoremap <C-A-L> 5zl
+nnoremap <C-A-H> 5zh
+
 "Remap VIM 0 to first non-blank character
 map 0 ^
  
