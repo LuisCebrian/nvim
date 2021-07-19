@@ -1,3 +1,4 @@
+let g:isDbtProject = !empty(expand(glob("dbt_project.yml")))
 let s:dbtrpcscript = resolve(expand('<sfile>:p:h:h')) . '/general/dbtrpc.py'
 
 execute 'py3file ' . s:dbtrpcscript
@@ -22,5 +23,9 @@ endfunction
 
 command! -nargs=1 -complete=command Redir silent call Redir(<q-args>)
 
-nmap <leader>bq :Redir python3 print(submitRpc())<CR>
+nmap <leader>bq :Redir python3 print(submitQuery())<CR>
 nmap <leader>bc :Redir python3 print(getCompiledSqlSafe())<CR>
+
+if g:isDbtProject
+    autocmd BufWritePost *.sql :python3 restartRpcServer()
+endif

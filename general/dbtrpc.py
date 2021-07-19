@@ -13,6 +13,9 @@ SERVER_URL = "http://0.0.0.0:8580/jsonrpc"
 HEADERS = {'content-type': 'application/json'}
 
 
+def uniqueId():
+    return uuid.uuid1().int
+
 def checkErrors(response):
     if 'error' not in response:
         return
@@ -45,7 +48,7 @@ def submitCompileJob():
     payload = {
             "jsonrpc": "2.0",
             "method": "compile_sql",
-            "id": uuid.uuid1().int,
+            "id": uniqueId(),
             "params": {
                 "timeout": 60,
                 "sql": encoded_sql,
@@ -62,7 +65,7 @@ def requestCompiledResult(request_token):
     payload = {
         "jsonrpc": "2.0",
         "method": "poll",
-        "id": uuid.uuid1().int,
+        "id": uniqueId(),
         "params": {"request_token": request_token}
     }
     response = pollResults(payload)
@@ -82,7 +85,7 @@ def getCompiledSql():
     return query
 
 
-def submitRpc(tmp_file='/tmp/bigquery.txt'):
+def submitQuery(tmp_file='/tmp/bigquery.txt'):
     try:
         compiled_sql = getCompiledSql()
     except Exception as e:
@@ -100,4 +103,21 @@ def getCompiledSqlSafe():
         return getCompiledSql()
     except Exception as e:
         return str(e)
+
+def restartRpcServer():
+    payload = {
+        "jsonrpc": "2.0",
+        "method": "status",
+        "id": uniqueId(),
+    }
+    try:
+        response = requests.post(
+            SERVER_URL, data=json.dumps(payload), headers=HEADERS
+        ).json()
+    except:
+        # Server not running
+        return
+
+    pid = response['result']['pid']
+    os.system(f'kill -HUP {pid}')
 
