@@ -54,6 +54,9 @@ Plug 'hrsh7th/nvim-compe'
 " Treesiter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" Markdown previewer
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
 
 call plug#end()
 
