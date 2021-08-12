@@ -50,6 +50,7 @@ Plug 'mhinz/vim-startify'
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-compe'
+Plug 'dense-analysis/ale'
 
 " Treesiter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
