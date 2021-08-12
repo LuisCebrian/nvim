@@ -1,4 +1,5 @@
 " Base Configuration
+source $HOME/.config/nvim/general/providers.vim
 source $HOME/.config/nvim/vimplug/plugins.vim
 source $HOME/.config/nvim/general/settings.vim
 source $HOME/.config/nvim/general/mappings.vim
