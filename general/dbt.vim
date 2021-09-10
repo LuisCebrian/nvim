@@ -23,9 +23,34 @@ endfunction
 
 command! -nargs=1 -complete=command Redir silent call Redir(<q-args>)
 
-nmap <leader>bq :Redir python3 print(submitQuery())<CR>
-nmap <leader>bc :Redir python3 print(getCompiledSqlSafe())<CR>
+function! OpenMirrorFile(extension)
+    let currentFile = expand('%:r')
+    let docFile = currentFile . '.' . a:extension
+    execute 'edit' docFile
+endfunction
+
+function! OpenAltFile()
+    let extension = expand('%:e')
+    if extension ==? 'sql'
+        call OpenMirrorFile('yml')
+    elseif extension ==? 'yml'
+        call OpenMirrorFile('sql')
+    endif
+endfunction
+
+" Commands
+command! DbtRunSql :Redir python3 print(submitQuery())
+command! DbtCompileSql :Redir python3 print(getCompiledSqlSafe())
+command! DbtRestartRpcServer :python3 restartRpcServer()
+command! DbtOpenDocFile :call OpenMirrorFile('yml')
+command! DbtOpenSourceFile :call OpenMirrorFile('sql')
+command! DbtOpenAltFile :call OpenAltFile()
+
+" Mappings
+nnoremap <leader>bq :DbtRunSql<CR>
+nnoremap <leader>bc :DbtCompileSql<CR>
+nnoremap <leader>ba :DbtOpenAltFile<CR>
 
 if g:isDbtProject
-    autocmd BufWritePost *.sql :python3 restartRpcServer()
+    autocmd BufWritePost *.sql :DbtRestartRpcServer
 endif
