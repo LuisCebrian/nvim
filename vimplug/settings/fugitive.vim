@@ -6,7 +6,7 @@ nnoremap <leader>gh :0Gclog<CR>
 
 function GitDiff()
     " Open git diff in a vertical split
-    silent! vert Git diff
+    silent! vert botright Git diff
     " Highlight trailing whitespaces
     match NvimInternalError /[^\s]\s\+$/
 endfunction

@@ -14,7 +14,10 @@ function! Redir(cmd)
     execute a:cmd
     redir END
 
-    new
+    " Open a new window using full width
+    " no matter if we have vertical splits
+    botright new
+
     let w:scratch = 1
     setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile cc=
     call setline(1, split(output, "\n"))
