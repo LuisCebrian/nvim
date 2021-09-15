@@ -52,5 +52,5 @@ nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
 
 if g:isDbtProject
-    autocmd BufWritePost *.sql :DbtRestartRpcServer
+    autocmd BufWritePost *.sql,*.yml :DbtRestartRpcServer
 endif
