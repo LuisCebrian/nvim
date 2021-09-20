@@ -4,15 +4,17 @@ let s:dbtrpcscript = resolve(expand('<sfile>:p:h:h')) . '/general/dbtrpc.py'
 execute 'py3file ' . s:dbtrpcscript
 
 function! Redir(cmd)
+
+    redir => output
+    execute a:cmd
+    redir END
+
+    " Close the window if it already exists
     for win in range(1, winnr('$'))
         if getwinvar(win, 'scratch')
             execute win . 'windo close'
         endif
     endfor
-
-    redir => output
-    execute a:cmd
-    redir END
 
     " Open a new window using full width
     " no matter if we have vertical splits
