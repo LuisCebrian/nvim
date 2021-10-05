@@ -31,6 +31,7 @@ Plug 'hoob3rt/lualine.nvim'
 
 "Debug
 Plug 'puremourning/vimspector'
+Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
 " Git
 Plug 'tpope/vim-fugitive'
