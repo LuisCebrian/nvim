@@ -11,4 +11,5 @@ let g:ale_python_isort_executable = $HOME . '/.virtualenvs/nvim/bin/isort'
 
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+let g:ale_sign_priority = 10
 
