@@ -24,12 +24,15 @@ let g:nvim_tree_icons = {
     \ }
 
 nnoremap <leader>e :NvimTreeToggle<CR>
+nnoremap <leader>fe :NvimTreeFindFile<CR>
+
+autocmd FocusGained * :NvimTreeRefresh
 
 lua << EOF
 require'nvim-tree'.setup {
     auto_close = true,
     update_focused_file = {
-        enable = true
+        enable = false
     },
     filters = {
         custom = {
