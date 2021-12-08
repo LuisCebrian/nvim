@@ -48,19 +48,21 @@ function! OpenAltFile()
     endif
 endfunction
 
-" error message
-function! s:ErrorMsg(msg)
-    echohl ErrorMsg
-    echom 'ERROR: '. a:msg
+" warning message
+function! s:WarnMsg(msg)
+    echohl WarningMsg
+    echom a:msg
     echohl NONE
 endfunc
 
+function! s:onExit(job_id, data, event)
+    call s:WarnMsg('Dbt rpc sever is not running')
+endfunc
+
 function! SpinUpDbtServer()
-    let s:serverJob = jobstart('dbt rpc --port '. g:dbt_rpc_server_port)
-    if s:serverJob <= 0
-        call s:ErrorMsg('DBT: Error starting the rpc server')
-        return 1
-    endif
+    let l:callbacks = {}
+    let l:callbacks['on_exit'] = function('s:onExit')
+    let s:serverJob = jobstart('dbt rpc --port '. g:dbt_rpc_server_port, l:callbacks)
     let s:serverPid = jobpid(s:serverJob)
 endfunction
 
