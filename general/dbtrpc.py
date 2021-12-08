@@ -7,7 +7,8 @@ import uuid
 import requests
 import vim
 
-SERVER_URL = "http://0.0.0.0:8580/jsonrpc"
+RPC_SERVER_PORT = vim.eval("g:dbt_rpc_server_port")
+SERVER_URL = f"http://0.0.0.0:{RPC_SERVER_PORT}/jsonrpc"
 HEADERS = {"content-type": "application/json"}
 
 
@@ -100,7 +101,7 @@ def submitQuery(tmp_file="/tmp/bigquery.txt"):
     with open(tmp_file, "w") as f:
         f.write(compiled_sql)
 
-    command = "bq query --use_legacy_sql=false < {}".format(tmp_file)
+    command = "bq query --use_legacy_sql=false -n 200 < {}".format(tmp_file)
     output = os.popen(command).read()
     return output
 
