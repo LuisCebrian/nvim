@@ -1,6 +1,11 @@
 let g:isDbtProject = !empty(expand(glob("dbt_project.yml")))
 let s:dbtrpcscript = resolve(expand('<sfile>:p:h:h')) . '/general/dbtrpc.py'
 
+" Defaults settings
+
+" DBT RPC server port
+let g:dbt_rpc_server_port = get(g:, 'dbt_rpc_server_port', 8580)
+
 execute 'py3file ' . s:dbtrpcscript
 
 function! Redir(cmd)
@@ -43,6 +48,22 @@ function! OpenAltFile()
     endif
 endfunction
 
+" error message
+function! s:ErrorMsg(msg)
+    echohl ErrorMsg
+    echom 'ERROR: '. a:msg
+    echohl NONE
+endfunc
+
+function! SpinUpDbtServer()
+    let s:serverJob = jobstart('dbt rpc --port '. g:dbt_rpc_server_port)
+    if s:serverJob <= 0
+        call s:ErrorMsg('DBT: Error starting the rpc server')
+        return 1
+    endif
+    let s:serverPid = jobpid(s:serverJob)
+endfunction
+
 " Commands
 command! DbtRunSql :Redir python3 print(submitQuery())
 command! DbtCompileSql :Redir python3 print(getCompiledSqlSafe())
@@ -57,5 +78,6 @@ nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
 
 if g:isDbtProject
-    autocmd BufWritePost *.sql,*.yml :DbtRestartRpcServer
+    autocmd FocusGained,BufWritePost *.sql,*.yml,*.csv :DbtRestartRpcServer
+    autocmd VimEnter * :call SpinUpDbtServer()
 endif
