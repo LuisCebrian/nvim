@@ -8,11 +8,25 @@ let g:dbt_rpc_server_port = get(g:, 'dbt_rpc_server_port', 8580)
 
 execute 'py3file ' . s:dbtrpcscript
 
-function! Redir(cmd)
+" Redirect the output of the command to a file
+function! s:RedirOutput(cmd)
 
     redir => output
     execute a:cmd
     redir END
+
+    return output
+endfunction
+
+
+function! Redir(cmd)
+
+    let l:output = trim(execute("silent call s:RedirOutput(a:cmd)"))
+
+    if l:output == ''
+        echom 'Query returned no results'
+        return 0
+    endif
 
     " Close the window if it already exists
     for win in range(1, winnr('$'))
@@ -27,11 +41,11 @@ function! Redir(cmd)
 
     let w:scratch = 1
     setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile cc=
-    call setline(1, split(output, "\n"))
+    call setline(1, split(l:output, "\n"))
     setlocal noma
 endfunction
 
-command! -nargs=1 -complete=command Redir silent call Redir(<q-args>)
+command! -nargs=1 -complete=command Redir call Redir(<q-args>)
 
 function! OpenMirrorFile(extension)
     let currentFile = expand('%:r')
@@ -55,13 +69,13 @@ function! s:WarnMsg(msg)
     echohl NONE
 endfunc
 
-function! s:onExit(job_id, data, event)
+function! s:onError(job_id, data, event)
     call s:WarnMsg('Dbt rpc sever is not running')
 endfunc
 
 function! SpinUpDbtServer()
     let l:callbacks = {}
-    let l:callbacks['on_exit'] = function('s:onExit')
+    let l:callbacks['on_stderr'] = function('s:onError')
     let s:serverJob = jobstart('dbt rpc --port '. g:dbt_rpc_server_port, l:callbacks)
     let s:serverPid = jobpid(s:serverJob)
 endfunction
