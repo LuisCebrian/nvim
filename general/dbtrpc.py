@@ -12,12 +12,36 @@ SERVER_URL = f"http://0.0.0.0:{RPC_SERVER_PORT}/jsonrpc"
 HEADERS = {"content-type": "application/json"}
 
 
+class GenericRpcError(Exception):
+    pass
+
+
+class CompilingRpcError(GenericRpcError):
+    pass
+
+
+def errorFromCode(code):
+    error_codes = {10010: CompilingRpcError}
+    return error_codes.get(code, GenericRpcError)
+
+
 def uniqueId():
     return uuid.uuid1().int
 
 
 def formatJson(data):
     return json.dumps(data, indent=2)
+
+
+def guardCompilingError(func):
+    def _f(*args, **kwargs):
+        while True:
+            try:
+                return func(*args, **kwargs)
+            except CompilingRpcError:
+                time.sleep(0.1)
+
+    return _f
 
 
 def checkErrors(response):
@@ -27,22 +51,34 @@ def checkErrors(response):
     message = response["error"]["message"]
     error_type = response["error"]["data"]["type"]
     error_message = response["error"]["data"]["message"]
-    raise Exception(f"({code}, {message}): {error_type}, {error_message}")
+    errorKlass = errorFromCode(code)
+    raise errorKlass(f"({code}, {message}): {error_type}, {error_message}")
+
+
+def raiseError(func):
+    def _f(*args, **kwargs):
+        response = func(*args, **kwargs)
+        checkErrors(response)
+        return response
+
+    return _f
+
+
+@raiseError
+def requestServer(data=None):
+    response = requests.post(SERVER_URL, data=json.dumps(data), headers=HEADERS).json()
+    return response
 
 
 def pollResults(payload):
     while True:
-        response = requests.post(
-            SERVER_URL, data=json.dumps(payload), headers=HEADERS
-        ).json()
-
-        checkErrors(response)
-
+        response = requestServer(payload)
         if response["result"]["state"] == "success":
             return response
         time.sleep(0.1)
 
 
+@guardCompilingError
 def submitCompileJob():
     cb = "\n".join(vim.current.buffer)
     sql = cb.encode("utf-8")
@@ -55,9 +91,7 @@ def submitCompileJob():
         "id": uniqueId(),
         "params": {"timeout": 60, "sql": encoded_sql, "name": filename},
     }
-    response = requests.post(
-        SERVER_URL, data=json.dumps(payload), headers=HEADERS
-    ).json()
+    response = requestServer(payload)
     return response
 
 
