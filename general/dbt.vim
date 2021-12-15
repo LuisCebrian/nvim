@@ -62,6 +62,15 @@ function! OpenAltFile()
     endif
 endfunction
 
+" From a model file, find its documentation
+function FindDbtDocumentation()
+    let l:qflist = getqflist()
+    let l:modelName = expand('%:t:r')
+    silent execute "grep -r --include \\*.yml " . "'name:\\s*" l:modelName . "' ."
+    call setqflist(l:qflist, 'r')
+endfunction
+
+
 " warning message
 function! s:WarnMsg(msg)
     echohl WarningMsg
@@ -84,7 +93,7 @@ endfunction
 command! DbtRunSql :Redir python3 print(submitQuery())
 command! DbtCompileSql :Redir python3 print(getCompiledSqlSafe())
 command! DbtRestartRpcServer :python3 restartRpcServer()
-command! DbtOpenDocFile :call OpenMirrorFile('yml')
+command! DbtOpenDocFile :call FindDbtDocumentation()
 command! DbtOpenSourceFile :call OpenMirrorFile('sql')
 command! DbtOpenAltFile :call OpenAltFile()
 
