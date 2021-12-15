@@ -19,7 +19,7 @@ function! s:RedirOutput(cmd)
 endfunction
 
 
-function! Redir(cmd)
+function! Redir(cmd, filetype='')
 
     let l:output = trim(execute("silent call s:RedirOutput(a:cmd)"))
 
@@ -43,9 +43,12 @@ function! Redir(cmd)
     setlocal buftype=nofile bufhidden=wipe nobuflisted noswapfile cc=
     call setline(1, split(l:output, "\n"))
     setlocal noma
+    if a:filetype !=# ''
+        let &l:filetype = a:filetype
+    endif
 endfunction
 
-command! -nargs=1 -complete=command Redir call Redir(<q-args>)
+" command! -nargs=1 -complete=command Redir call Redir(<q-args>)
 
 function! OpenMirrorFile(extension)
     let currentFile = expand('%:r')
@@ -89,9 +92,22 @@ function! SpinUpDbtServer()
     let s:serverPid = jobpid(s:serverJob)
 endfunction
 
+function! DbtCommand(args)
+    execute '!dbt '. a:args
+endfunction
+
+function! DbtCompileSql()
+    call Redir('python3 print(getCompiledSqlSafe())', 'sql')
+endfunction
+
+function! DbtRunSql()
+    call Redir('python3 print(submitQuery())')
+endfunction
+
 " Commands
-command! DbtRunSql :Redir python3 print(submitQuery())
-command! DbtCompileSql :Redir python3 print(getCompiledSqlSafe())
+command! -nargs=1 Dbt :call DbtCommand(<q-args>)
+command! DbtRunSql :call DbtRunSql()
+command! DbtCompileSql :call DbtCompileSql()
 command! DbtRestartRpcServer :python3 restartRpcServer()
 command! DbtOpenDocFile :call FindDbtDocumentation()
 command! DbtOpenSourceFile :call OpenMirrorFile('sql')
