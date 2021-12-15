@@ -37,6 +37,9 @@ nnoremap <silent> <C-s> :w<CR>
 nnoremap <leader>q :q<CR>
 nnoremap <leader>bd :bd<CR>
 
+" Run last command
+nnoremap <leader>c @:
+
 nnoremap <silent> <C-Up>    :resize -2<CR>
 nnoremap <silent> <C-Down>  :resize +2<CR>
 nnoremap <silent> <C-Left>  :vertical resize -2<CR>
