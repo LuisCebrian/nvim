@@ -25,9 +25,19 @@ function! TelescopeFindFiles()
     lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({previewer=false, prompt_title='Find Files'}))
 endfunction
 
+function! TelescopeFindWord()
+    lua require('telescope.builtin').grep_string(require('telescope.themes').get_dropdown())
+endfunction
+
+function! TelescopeCommandHistory()
+    lua require('telescope.builtin').command_history(require('telescope.themes').get_dropdown())
+endfunction
+
 nnoremap <leader>ff :call TelescopeLspDocumentSymbols()<cr>
 nnoremap <leader>fn :call TelescopeLspDynamicWorkspaceSymbols()<cr>
 nnoremap <leader>fg :call TelescopeLiveGrep()<cr>
+nnoremap <leader>fw :call TelescopeFindWord()<cr>
+nnoremap <leader>fc :call TelescopeCommandHistory()<cr>
 nnoremap <leader>fb :call TelescopeBuffers()<cr>
 nnoremap <C-p> :call TelescopeProjectFiles()<cr>
 nnoremap <leader>fd :call TelescopeFindFiles()<cr>
