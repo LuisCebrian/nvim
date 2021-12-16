@@ -14,12 +14,8 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-A-L> 5zl
 nnoremap <C-A-H> 5zh
 
-"Remap VIM 0 to first non-blank character
-map 0 ^
- 
 "Rebind <Leader> key
 let mapleader = " "
-
 
 "Better indentation
 vnoremap < <gv
