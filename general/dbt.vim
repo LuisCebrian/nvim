@@ -93,7 +93,7 @@ function! SpinUpDbtServer()
 endfunction
 
 function! DbtCommand(args)
-    execute '!dbt '. a:args
+    execute 'pedit + term://dbt '. a:args
 endfunction
 
 function! DbtCompileSql()
@@ -117,6 +117,8 @@ command! DbtOpenAltFile :call OpenAltFile()
 nnoremap <leader>bq :DbtRunSql<CR>
 nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
+nnoremap <leader>bt :Dbt test -m %<CR>
+nnoremap <leader>br :Dbt run -m %<CR>
 
 if g:isDbtProject
     autocmd FocusGained,BufWritePost *.sql,*.yml,*.csv :DbtRestartRpcServer
