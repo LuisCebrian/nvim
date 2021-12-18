@@ -117,7 +117,7 @@ command! DbtOpenAltFile :call OpenAltFile()
 nnoremap <leader>bq :DbtRunSql<CR>
 nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
-nnoremap <leader>bt :Dbt test -m %<CR>
+nnoremap <leader>bt :Dbt test -m % --greedy<CR>
 nnoremap <leader>br :Dbt run -m %<CR>
 
 if g:isDbtProject
