@@ -6,6 +6,9 @@ let s:dbtrpcscript = resolve(expand('<sfile>:p:h:h')) . '/general/dbtrpc.py'
 " DBT RPC server port
 let g:dbt_rpc_server_port = get(g:, 'dbt_rpc_server_port', 8580)
 
+" Number of results to return
+let g:dbt_query_results_limit = get(g:, 'dbt_query_results_limit', 200)
+
 execute 'py3file ' . s:dbtrpcscript
 
 " Redirect the output of the command to a file
@@ -73,10 +76,16 @@ function FindDbtDocumentation()
     call setqflist(l:qflist, 'r')
 endfunction
 
-
 " warning message
 function! s:WarnMsg(msg)
     echohl WarningMsg
+    echom a:msg
+    echohl NONE
+endfunc
+
+" error message
+function! s:ErrMsg(msg)
+    echohl ErrorMsg
     echom a:msg
     echohl NONE
 endfunc
@@ -100,13 +109,21 @@ function! DbtCompileSql()
     call Redir('python3 print(getCompiledSqlSafe())', 'sql')
 endfunction
 
-function! DbtRunSql()
-    call Redir('python3 print(submitQuery())')
+function! DbtRunSql(arg)
+    if a:arg ==# ''
+        let l:limit = g:dbt_query_results_limit
+    elseif a:arg =~# '^\d\+$'
+        let l:limit = str2nr(a:arg)
+    else
+        call s:ErrMsg('Argument should be a number')
+        return 1
+    endif
+    call Redir('python3 print(submitQuery('. l:limit .'))')
 endfunction
 
 " Commands
 command! -nargs=1 Dbt :call DbtCommand(<q-args>)
-command! DbtRunSql :call DbtRunSql()
+command! -nargs=? DbtRunSql :call DbtRunSql(<q-args>)
 command! DbtCompileSql :call DbtCompileSql()
 command! DbtRestartRpcServer :python3 restartRpcServer()
 command! DbtOpenDocFile :call FindDbtDocumentation()

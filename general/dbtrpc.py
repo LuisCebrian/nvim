@@ -8,6 +8,7 @@ import requests
 import vim
 
 RPC_SERVER_PORT = vim.eval("g:dbt_rpc_server_port")
+TMP_FILE = "/tmp/bigquery.txt"
 SERVER_URL = f"http://0.0.0.0:{RPC_SERVER_PORT}/jsonrpc"
 HEADERS = {"content-type": "application/json"}
 
@@ -109,7 +110,7 @@ def requestCompiledResult(request_token):
 def getCompiledSql():
     try:
         response = submitCompileJob()
-    except:
+    except Exception:
         raise Exception("DBT Server Rpc is not running. Run: 'dbt rpc'")
 
     try:
@@ -126,16 +127,16 @@ def getCompiledSql():
     return query
 
 
-def submitQuery(tmp_file="/tmp/bigquery.txt"):
+def submitQuery(results=100):
     try:
         compiled_sql = getCompiledSql()
     except Exception as e:
         return str(e)
 
-    with open(tmp_file, "w") as f:
+    with open(TMP_FILE, "w") as f:
         f.write(compiled_sql)
 
-    command = "bq query --use_legacy_sql=false -n 200 < {}".format(tmp_file)
+    command = f"bq query --use_legacy_sql=false -n {results} < {TMP_FILE}"
     output = os.popen(command).read()
     return output
 
@@ -157,7 +158,7 @@ def restartRpcServer():
         response = requests.post(
             SERVER_URL, data=json.dumps(payload), headers=HEADERS
         ).json()
-    except:
+    except Exception:
         # Server not running
         return
 
