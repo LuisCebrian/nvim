@@ -109,21 +109,18 @@ function! DbtCompileSql()
     call Redir('python3 print(getCompiledSqlSafe())', 'sql')
 endfunction
 
-function! DbtRunSql(arg)
-    if a:arg ==# ''
-        let l:limit = g:dbt_query_results_limit
-    elseif a:arg =~# '^\d\+$'
-        let l:limit = str2nr(a:arg)
+function! DbtRunSql(count)
+    if a:count ># 0
+        let l:limit = a:count
     else
-        call s:ErrMsg('Argument should be a number')
-        return 1
+        let l:limit = g:dbt_query_results_limit
     endif
     call Redir('python3 print(submitQuery('. l:limit .'))')
 endfunction
 
 " Commands
 command! -nargs=1 Dbt :call DbtCommand(<q-args>)
-command! -nargs=? DbtRunSql :call DbtRunSql(<q-args>)
+command! -count=0 DbtRunSql :call DbtRunSql(<count>)
 command! DbtCompileSql :call DbtCompileSql()
 command! DbtRestartRpcServer :python3 restartRpcServer()
 command! DbtOpenDocFile :call FindDbtDocumentation()
