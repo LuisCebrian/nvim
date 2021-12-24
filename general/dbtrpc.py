@@ -14,15 +14,34 @@ HEADERS = {"content-type": "application/json"}
 
 
 class GenericRpcError(Exception):
-    pass
+    @classmethod
+    def from_response(cls, response):
+        code = response["error"]["code"]
+        message = response["error"]["message"]
+        error_type = response["error"]["data"].get("type")
+        error_message = response["error"]["data"]["message"]
+        return cls(f"({code}, {message}): {error_type}, {error_message}")
 
 
 class CompilingRpcError(GenericRpcError):
-    pass
+    code = 10010
+
+
+class FailedCompilationRpcError(GenericRpcError):
+    code = 10011
+
+    @classmethod
+    def from_response(cls, response):
+        code = response["error"]["code"]
+        cause = response["error"]["data"]["cause"]["message"]
+        return cls(f"({code}): {cause}")
 
 
 def errorFromCode(code):
-    error_codes = {10010: CompilingRpcError}
+    error_codes = {
+        CompilingRpcError.code: CompilingRpcError,
+        FailedCompilationRpcError.code: FailedCompilationRpcError,
+    }
     return error_codes.get(code, GenericRpcError)
 
 
@@ -49,11 +68,8 @@ def checkErrors(response):
     if "error" not in response:
         return
     code = response["error"]["code"]
-    message = response["error"]["message"]
-    error_type = response["error"]["data"]["type"]
-    error_message = response["error"]["data"]["message"]
-    errorKlass = errorFromCode(code)
-    raise errorKlass(f"({code}, {message}): {error_type}, {error_message}")
+    error = errorFromCode(code).from_response(response)
+    raise error
 
 
 def raiseError(func):
@@ -110,6 +126,8 @@ def requestCompiledResult(request_token):
 def getCompiledSql():
     try:
         response = submitCompileJob()
+    except GenericRpcError as e:
+        raise e
     except Exception:
         raise Exception("DBT Server Rpc is not running. Run: 'dbt rpc'")
 
