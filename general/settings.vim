@@ -76,3 +76,26 @@ function TrimWhiteSpace()
   %s/\s*$//
   ''
 endfunction
+
+" Remove the current item from the quickfix list.
+function! RemoveQFItem() range
+    let l:qf_list = getqflist()
+    if len(l:qf_list) > 0
+        call remove(l:qf_list, a:firstline - 1, a:lastline - 1)
+        call setqflist([], 'r', {'items': l:qf_list})
+    endif
+
+    if len(l:qf_list) > 0
+        call setpos('.', [bufnr(), a:firstline, 1, 0])
+    else
+        cclose
+    endif
+endfunction
+
+" command! RemoveQFItem :call RemoveQFItem()
+
+augroup quickfixdd
+  " Use map <buffer> to only map dd in the quickfix window.
+  autocmd FileType qf nnoremap <silent><buffer>dd :call RemoveQFItem()<cr>
+  autocmd FileType qf vnoremap <silent><buffer>d :call RemoveQFItem()<cr>
+augroup end
