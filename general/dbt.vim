@@ -102,7 +102,7 @@ function! SpinUpDbtServer()
 endfunction
 
 function! DbtCommand(args)
-    execute 'pedit + term://dbt '. a:args
+    execute '25new + term://dbt '. a:args
 endfunction
 
 function! DbtCompileSql()
