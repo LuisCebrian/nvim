@@ -118,10 +118,44 @@ function! DbtRunSql(count)
     call Redir('python3 print(submitQuery('. l:limit .'))')
 endfunction
 
+function! s:PrettyBytes(bytes)
+  let l:bytes = a:bytes
+  let l:sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  let l:i = 0
+  while l:bytes >= 1024
+      let l:bytes = l:bytes / 1024.0
+      let l:i += 1
+  endwhile
+  return l:bytes > 0 ? printf(' %.1f%s ', l:bytes, l:sizes[l:i]) : ''
+endfunction
+
+function! s:printBilledBytes(bytes)
+    echom 'This query will process'
+    echohl Character
+    echon a:bytes
+    echohl NONE
+    echon ' when run.'
+endfunction
+
+function! DbtCheckSql()
+    let l:output = substitute(trim(execute("python3 print(previewData())")), '\%x00', " ", "")
+    if l:output =~# '^Query successfully validated'
+        let l:bytes = s:PrettyBytes(str2nr(matchlist(l:output, '\d\+')[0]))
+        call s:printBilledBytes(l:bytes)
+        return
+    elseif l:output =~# '^Error in query string:'
+        let l:output = substitute(l:output, "Error in query string: ", "", "")
+    elseif l:output =~# '^BigQuery error'
+        let l:output = substitute(l:output, "BigQuery error in query operation: ", "", "")
+    endif
+    call s:ErrMsg(l:output)
+endfunction
+
 " Commands
 command! -nargs=1 Dbt :call DbtCommand(<q-args>)
 command! -count=0 DbtRunSql :call DbtRunSql(<count>)
 command! DbtCompileSql :call DbtCompileSql()
+command! DbtCheckSql :call DbtCheckSql()
 command! DbtRestartRpcServer :python3 restartRpcServer()
 command! DbtOpenDocFile :call FindDbtDocumentation()
 command! DbtOpenSourceFile :call OpenMirrorFile('sql')
@@ -130,6 +164,7 @@ command! DbtOpenAltFile :call OpenAltFile()
 " Mappings
 nnoremap <leader>bq :DbtRunSql<CR>
 nnoremap <leader>bc :DbtCompileSql<CR>
+nnoremap <leader>bp :DbtCheckSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
 nnoremap <leader>bt :Dbt test -m % --greedy<CR>
 nnoremap <leader>br :Dbt run -m %<CR>
