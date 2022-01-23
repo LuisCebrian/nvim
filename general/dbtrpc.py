@@ -159,6 +159,20 @@ def submitQuery(results=100):
     return output
 
 
+def previewData():
+    try:
+        compiled_sql = getCompiledSql()
+    except Exception as e:
+        return str(e)
+
+    with open(TMP_FILE, "w") as f:
+        f.write(compiled_sql)
+
+    command = f"bq query --use_legacy_sql=false --dry_run < {TMP_FILE}"
+    output = os.popen(command).read()
+    return output
+
+
 def getCompiledSqlSafe():
     try:
         return getCompiledSql()
