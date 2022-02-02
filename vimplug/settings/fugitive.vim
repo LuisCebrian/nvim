@@ -8,8 +8,8 @@ nnoremap <leader>gh :0Gclog<CR>
 function! GitDiff()
     " Open git diff in a vertical split
     silent! vert botright Git diff
-    " Highlight trailing whitespaces
-    match NvimInternalError /[^\s]\s\+$/
+    " Highlight trailing whitespaces on newly added lines
+    match NvimInternalError /^+.*\zs[^\s]\s\+\ze$/
 endfunction
 
 function! GitCommit()
