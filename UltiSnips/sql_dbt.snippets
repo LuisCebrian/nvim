@@ -72,6 +72,10 @@ snippet ref "dbt ref"
 \{\{ ref('${1:model_name}') \}\}
 endsnippet
 
+snippet src "dbt source"
+\{\{ source('${1:source_name}', '${2:model_name}') \}\}
+endsnippet
+
 snippet cte "dbt cte"
 ${1:cte_name} as (
     select * from \{\{ ref('${2:model_name}') \}\}
