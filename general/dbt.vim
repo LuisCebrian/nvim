@@ -97,7 +97,7 @@ endfunc
 function! SpinUpDbtServer()
     let l:callbacks = {}
     let l:callbacks['on_stderr'] = function('s:onError')
-    let s:serverJob = jobstart('dbt rpc --port '. g:dbt_rpc_server_port, l:callbacks)
+    let s:serverJob = jobstart('dbt-rpc serve --port '. g:dbt_rpc_server_port, l:callbacks)
     let s:serverPid = jobpid(s:serverJob)
 endfunction
 
@@ -166,7 +166,7 @@ nnoremap <leader>bq :DbtRunSql<CR>
 nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>bp :DbtCheckSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
-nnoremap <leader>bt :Dbt test -m % --greedy<CR>
+nnoremap <leader>bt :Dbt test -m %<CR>
 nnoremap <leader>br :Dbt run -m %<CR>
 
 if g:isDbtProject
