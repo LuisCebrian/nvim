@@ -1,4 +1,3 @@
-let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
 
 " default will show icon by default if no icon is provided
@@ -30,7 +29,6 @@ autocmd FocusGained * :NvimTreeRefresh
 
 lua << EOF
 require'nvim-tree'.setup {
-    auto_close = true,
     update_cwd = true,
     update_focused_file = {
         enable = false
@@ -45,6 +43,11 @@ require'nvim-tree'.setup {
     },
     view = {
         width = 40
+    },
+    renderer = {
+        indent_markers = {
+            enable = true
+        }
     }
 }
 EOF
