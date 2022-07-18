@@ -2,7 +2,7 @@
 lua require('telescope_config')
 
 function! TelescopeLspDocumentSymbols()
-    lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({previewer=false, prompt_title='Find Class', prompt_prefix = " ", default_text=" :class: "}))
+    lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({previewer=false, prompt_title='Find Class', prompt_prefix = " ", default_text=":class:"}))
 endfunction
 
 function! TelescopeLspDynamicWorkspaceSymbols()
