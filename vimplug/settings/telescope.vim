@@ -10,7 +10,7 @@ function! TelescopeLspDynamicWorkspaceSymbols()
 endfunction
 
 function! TelescopeLiveGrep()
-    lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown(git_files))
+    lua require('telescope').extensions.live_grep_args.live_grep_args()
 endfunction
 
 function! TelescopeBuffers()

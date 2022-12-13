@@ -1,4 +1,5 @@
 local actions = require('telescope.actions')
+local lga_actions = require("telescope-live-grep-args.actions")
 require('telescope').setup{
   defaults = {
     mappings = {
@@ -6,6 +7,17 @@ require('telescope').setup{
         ["<esc>"] = actions.close
       },
    }
+  },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true,
+      mappings = {
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+        }
+      },
+      theme = "dropdown"
+    }
   }
 }
 

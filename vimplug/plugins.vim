@@ -21,6 +21,7 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Telescope dependencies
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 " Comments
