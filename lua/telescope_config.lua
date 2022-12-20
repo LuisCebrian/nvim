@@ -1,10 +1,22 @@
 local actions = require('telescope.actions')
 local lga_actions = require("telescope-live-grep-args.actions")
+local toggle_modes = function()
+  local mode = vim.api.nvim_get_mode().mode
+  if mode == "n" then
+    vim.cmd [[startinsert]]
+    return
+  end
+  if mode == "i" then
+    vim.cmd [[stopinsert]]
+    return
+  end
+end
 require('telescope').setup{
   defaults = {
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<C-c>"] = toggle_modes
       },
    }
   },
