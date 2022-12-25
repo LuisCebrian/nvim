@@ -25,4 +25,12 @@ return require('packer').startup(function(use)
   -- Git
   use 'tpope/vim-fugitive'
 
+  -- Tree view
+  use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      },
+  }
+
 end)

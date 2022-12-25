@@ -1,9 +1,3 @@
-nnoremap <leader>e :NvimTreeToggle<CR>
-nnoremap <leader>fe :NvimTreeFindFile<CR>
-
-autocmd FocusGained * :NvimTreeRefresh
-
-lua << EOF
 require'nvim-tree'.setup {
     update_cwd = true,
     update_focused_file = {
@@ -48,4 +42,6 @@ require'nvim-tree'.setup {
         }
     }
 }
-EOF
+
+vim.keymap.set('n', '<leader>e', vim.cmd.NvimTreeToggle)
+vim.keymap.set('n', '<leader>fe', vim.cmd.NvimTreeFindFile)
