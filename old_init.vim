@@ -30,4 +30,3 @@
 " luafile $HOME/.config/nvim/lua/lsp/docker-lsp.lua
 " luafile $HOME/.config/nvim/lua/lsp/yaml-lsp.lua
 " luafile $HOME/.config/nvim/lua/lsp/json-lsp.lua
-" luafile $HOME/.config/nvim/lua/lsp/treesitter.lua

@@ -15,7 +15,6 @@ Plug 'arcticicestudio/nord-vim'
 "Icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
 
 " Comments
 Plug 'tpope/vim-commentary'
@@ -59,9 +58,6 @@ Plug 'hrsh7th/nvim-cmp'
 " Snippets
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-
-" Treesiter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Markdown previewer
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
