@@ -16,4 +16,7 @@ return require('packer').startup(function(use)
       }
   }
 
+  -- Theme
+  use 'folke/tokyonight.nvim'
+
 end)

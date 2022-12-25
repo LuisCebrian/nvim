@@ -5,8 +5,6 @@
 " source $HOME/.config/nvim/general/mappings.vim
 " source $HOME/.config/nvim/general/dbt.vim
 
-" Themes
-" source $HOME/.config/nvim/themes/tokyonight.vim
 " luafile $HOME/.config/nvim/lua/themes/lualine.lua
 
 " Plugin Configuration

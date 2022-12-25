@@ -11,7 +11,6 @@ call plug#begin(stdpath('data') . '/plugged')
 
 " Themes
 Plug 'arcticicestudio/nord-vim'
-Plug 'folke/tokyonight.nvim'
 
 "Icons
 Plug 'kyazdani42/nvim-web-devicons'
