@@ -9,9 +9,6 @@ endif
 
 call plug#begin(stdpath('data') . '/plugged')
 
-" Themes
-Plug 'arcticicestudio/nord-vim'
-
 "Icons
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
@@ -27,7 +24,6 @@ Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
 " Git
-Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 "Utilities

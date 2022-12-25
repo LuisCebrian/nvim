@@ -11,7 +11,6 @@
 " source $HOME/.config/nvim/vimplug/settings/gitgutter.vim
 " source $HOME/.config/nvim/vimplug/settings/start-screen.vim
 " source $HOME/.config/nvim/vimplug/settings/nvim-tree.vim
-" source $HOME/.config/nvim/vimplug/settings/fugitive.vim
 " source $HOME/.config/nvim/vimplug/settings/vimspector.vim
 " luafile $HOME/.config/nvim/lua/hop_config.lua
 " source $HOME/.config/nvim/vimplug/settings/hop.vim
