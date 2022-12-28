@@ -1,15 +1,3 @@
-" Better window navigation
-imap <C-h> <C-w>h
-imap <C-j> <C-w>j
-imap <C-k> <C-w>k
-imap <C-l> <C-w>l
-
-" Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
 " Better horizontal scroll
 nnoremap <C-A-L> 5zl
 nnoremap <C-A-H> 5zh
