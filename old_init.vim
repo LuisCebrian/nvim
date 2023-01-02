@@ -4,8 +4,6 @@
 " source $HOME/.config/nvim/general/settings.vim
 " source $HOME/.config/nvim/general/dbt.vim
 
-" luafile $HOME/.config/nvim/lua/themes/lualine.lua
-
 " Plugin Configuration
 " source $HOME/.config/nvim/vimplug/settings/gitgutter.vim
 " source $HOME/.config/nvim/vimplug/settings/start-screen.vim

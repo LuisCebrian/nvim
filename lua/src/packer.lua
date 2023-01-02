@@ -35,4 +35,11 @@ return require('packer').startup(function(use)
 
   -- Tmux
   use 'christoomey/vim-tmux-navigator'
+
+  -- Status bar
+  use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+  }
+
 end)

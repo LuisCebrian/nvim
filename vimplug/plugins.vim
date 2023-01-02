@@ -16,9 +16,6 @@ Plug 'ryanoasis/vim-devicons'
 " Comments
 Plug 'tpope/vim-commentary'
 
-" Status bar
-Plug 'hoob3rt/lualine.nvim'
-
 "Debug
 Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
