@@ -24,12 +24,9 @@ Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 Plug 'airblade/vim-gitgutter'
 
 "Utilities
-Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'airblade/vim-rooter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-abolish'
 
 " Project
 Plug 'mhinz/vim-startify'

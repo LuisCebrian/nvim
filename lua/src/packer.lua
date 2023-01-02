@@ -44,5 +44,8 @@ return require('packer').startup(function(use)
 
   -- Utility
   use 'phaazon/hop.nvim'
+  use 'tpope/vim-surround'
+  use 'tpope/vim-abolish'
+  use 'tpope/vim-unimpaired'
 
 end)
