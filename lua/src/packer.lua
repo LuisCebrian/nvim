@@ -33,4 +33,6 @@ return require('packer').startup(function(use)
       },
   }
 
+  -- Tmux
+  use 'christoomey/vim-tmux-navigator'
 end)

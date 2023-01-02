@@ -34,7 +34,6 @@ Plug 'airblade/vim-rooter'
 Plug 'phaazon/hop.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
-Plug 'christoomey/vim-tmux-navigator'
 
 " Project
 Plug 'mhinz/vim-startify'
