@@ -8,8 +8,6 @@
 " source $HOME/.config/nvim/vimplug/settings/gitgutter.vim
 " source $HOME/.config/nvim/vimplug/settings/start-screen.vim
 " source $HOME/.config/nvim/vimplug/settings/vimspector.vim
-" luafile $HOME/.config/nvim/lua/hop_config.lua
-" source $HOME/.config/nvim/vimplug/settings/hop.vim
 " source $HOME/.config/nvim/vimplug/settings/markdown-preview.vim
 " source $HOME/.config/nvim/vimplug/settings/ale.vim
 " source $HOME/.config/nvim/vimplug/settings/vim-commentary.vim

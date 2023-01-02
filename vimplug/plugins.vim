@@ -28,7 +28,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'airblade/vim-rooter'
-Plug 'phaazon/hop.nvim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
 
