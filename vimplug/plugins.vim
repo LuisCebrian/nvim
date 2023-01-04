@@ -20,9 +20,6 @@ Plug 'tpope/vim-commentary'
 Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
-" Git
-Plug 'airblade/vim-gitgutter'
-
 "Utilities
 Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
