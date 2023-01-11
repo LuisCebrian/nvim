@@ -58,6 +58,14 @@ return require('packer').startup(function(use)
   use 'tpope/vim-abolish'
   use 'tpope/vim-unimpaired'
 
+  -- Comments
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+
   -- Languages: Markdown
   use({
       "iamcco/markdown-preview.nvim",
