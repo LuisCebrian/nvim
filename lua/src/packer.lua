@@ -46,6 +46,9 @@ return require('packer').startup(function(use)
       end
   }
 
+  -- Project management
+  use 'ahmedkhalf/project.nvim'
+
   -- Status bar
   use {
       'nvim-lualine/lualine.nvim',

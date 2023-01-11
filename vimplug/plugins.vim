@@ -19,7 +19,6 @@ Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
 "Utilities
 Plug 'jmcantrell/vim-virtualenv'
-Plug 'airblade/vim-rooter'
 
 " LSP
 Plug 'neovim/nvim-lspconfig'
