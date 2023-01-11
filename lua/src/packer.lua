@@ -57,6 +57,7 @@ return require('packer').startup(function(use)
   use 'tpope/vim-surround'
   use 'tpope/vim-abolish'
   use 'tpope/vim-unimpaired'
+  use 'windwp/nvim-autopairs'
 
   -- Comments
   use {

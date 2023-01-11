@@ -18,7 +18,6 @@ Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 
 "Utilities
-Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'airblade/vim-rooter'
 
