@@ -58,4 +58,14 @@ return require('packer').startup(function(use)
   use 'tpope/vim-abolish'
   use 'tpope/vim-unimpaired'
 
+  -- Languages: Markdown
+  use({
+      "iamcco/markdown-preview.nvim",
+      run = "cd app && npm install",
+      ft = "markdown",
+      config = function()
+          vim.g.mkdp_auto_close = 0
+      end,
+  })
+
 end)

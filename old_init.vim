@@ -5,7 +5,6 @@
 
 " Plugin Configuration
 " source $HOME/.config/nvim/vimplug/settings/vimspector.vim
-" source $HOME/.config/nvim/vimplug/settings/markdown-preview.vim
 " source $HOME/.config/nvim/vimplug/settings/ale.vim
 " source $HOME/.config/nvim/vimplug/settings/vim-commentary.vim
 " source $HOME/.config/nvim/vimplug/settings/vim-rooter.vim

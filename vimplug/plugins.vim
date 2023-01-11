@@ -41,10 +41,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
-" Markdown previewer
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-
-
 call plug#end()
 
 
