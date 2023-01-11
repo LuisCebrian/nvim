@@ -25,9 +25,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'jmcantrell/vim-virtualenv'
 Plug 'airblade/vim-rooter'
 
-" Project
-Plug 'mhinz/vim-startify'
-
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'dense-analysis/ale'

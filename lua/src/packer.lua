@@ -37,6 +37,15 @@ return require('packer').startup(function(use)
   -- Tmux
   use 'christoomey/vim-tmux-navigator'
 
+  -- Start screen
+  use {
+      'goolord/alpha-nvim',
+      requires = { 'nvim-tree/nvim-web-devicons' },
+      config = function ()
+          require'alpha'.setup(require'alpha.themes.startify'.config)
+      end
+  }
+
   -- Status bar
   use {
       'nvim-lualine/lualine.nvim',

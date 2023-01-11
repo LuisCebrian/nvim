@@ -4,7 +4,6 @@
 " source $HOME/.config/nvim/general/dbt.vim
 
 " Plugin Configuration
-" source $HOME/.config/nvim/vimplug/settings/start-screen.vim
 " source $HOME/.config/nvim/vimplug/settings/vimspector.vim
 " source $HOME/.config/nvim/vimplug/settings/markdown-preview.vim
 " source $HOME/.config/nvim/vimplug/settings/ale.vim
