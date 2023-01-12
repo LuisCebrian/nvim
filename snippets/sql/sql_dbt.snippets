@@ -1,0 +1,74 @@
+snippet config
+        {{
+            config(
+                materialized="$1",
+            )
+        }}
+
+snippet block
+        {% $0 %}
+
+snippet env
+        {{ env_var('${1:env_var_name}') }}
+
+snippet for
+        {% for ${1:item} in ${2:sequence} %}
+            $3
+        {% endfor %}
+
+snippet if
+        {%- if ${1:expr} -%}
+            $2
+        {%- endif -%}
+
+snippet ife
+        {%- if ${1:expr} -%}
+            $2
+        {%- else -%}
+            $3
+        {%- endif -%}
+
+snippet ifee
+        {%- if ${1:expr} -%}
+            $2
+        {%- elif $3 -%}
+            $4
+        {%- else -%}
+            $5
+        {%- endif -%}
+
+snippet log
+        {{ log(${1:var}, info=${2:True}) }}
+
+snippet macro
+        {% macro ${1:name}(${2:args}) %}
+            $3
+        {% endmacro %}
+
+snippet return
+        {{ return(${1}) }}
+
+snippet set
+        {% set ${1:var} = ${2:value} %}
+
+snippet sete
+        {% set ${1:name} %}
+            $2
+        {% endset %}
+
+snippet ref
+        {{ ref('${1:model_name}') }}
+
+snippet src
+        {{ source('${1:source_name}', '${2:model_name}') }}
+
+snippet cte
+        ${1:cte_name} as (
+            select * from {{ ref('${2:model_name}') }}
+        )
+
+snippet var
+        {{ var('${1:var_name}') }}
+
+snippet sel
+        select ${1:*} from ${2:final}
