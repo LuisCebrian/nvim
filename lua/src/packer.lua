@@ -94,6 +94,12 @@ return require('packer').startup(function(use)
       }
   }
 
+  -- LSP: Linter formatters
+  use({
+      "jose-elias-alvarez/null-ls.nvim",
+      requires = { "nvim-lua/plenary.nvim" },
+  })
+
   -- Languages: Markdown
   use({
       "iamcco/markdown-preview.nvim",

@@ -5,4 +5,3 @@
 
 " Plugin Configuration
 " source $HOME/.config/nvim/vimplug/settings/vimspector.vim
-" source $HOME/.config/nvim/vimplug/settings/ale.vim

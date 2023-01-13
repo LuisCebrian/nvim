@@ -20,9 +20,6 @@ Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 "Utilities
 Plug 'jmcantrell/vim-virtualenv'
 
-" LSP
-Plug 'dense-analysis/ale'
-
 call plug#end()
 
 
