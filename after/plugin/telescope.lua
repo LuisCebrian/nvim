@@ -61,6 +61,7 @@ telescope.setup{
 }
 
 telescope.load_extension("live_grep_args")
+telescope.load_extension('dap')
 
 vim.keymap.set('n', '<leader>ff', builtin.lsp_document_symbols, {})
 vim.keymap.set('n', '<leader>fn', builtin.lsp_dynamic_workspace_symbols, {})
@@ -71,3 +72,6 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>ft', builtin.git_branches, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>fd', builtin.find_files, {})
+
+local theme = require('telescope.themes').get_dropdown()
+vim.keymap.set('n', '<leader>dp', function() telescope.extensions.dap.list_breakpoints(theme) end, {})

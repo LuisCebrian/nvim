@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
       requires = {
           { "nvim-lua/plenary.nvim" },
           { "nvim-telescope/telescope-live-grep-args.nvim" },
+          { "nvim-telescope/telescope-dap.nvim"}
       }
   }
 
@@ -99,6 +100,17 @@ return require('packer').startup(function(use)
       "jose-elias-alvarez/null-ls.nvim",
       requires = { "nvim-lua/plenary.nvim" },
   })
+
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
+  use 'mfussenegger/nvim-dap-python'
+  use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+  use {
+      'theHamsta/nvim-dap-virtual-text',
+      config = function()
+          require("nvim-dap-virtual-text").setup({})
+      end
+  }
 
   -- Languages: Markdown
   use({

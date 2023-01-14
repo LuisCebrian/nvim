@@ -13,10 +13,6 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'ryanoasis/vim-devicons'
 
-"Debug
-Plug 'puremourning/vimspector'
-Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
-
 "Utilities
 Plug 'jmcantrell/vim-virtualenv'
 
