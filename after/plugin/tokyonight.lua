@@ -4,4 +4,5 @@ require('tokyonight').setup({
     }
 })
 
-vim.cmd('colorscheme tokyonight')
+vim.cmd('colorscheme tokyonight-night')
+vim.cmd('highlight CursorLine guibg=#212535')
