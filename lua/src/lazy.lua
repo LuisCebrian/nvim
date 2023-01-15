@@ -19,16 +19,6 @@ return require("lazy").setup({
 
     { import = "plugins" },
 
-    -- Fuzzy finder
-    {
-        "nvim-telescope/telescope.nvim",
-        dependencies = {
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-live-grep-args.nvim" },
-            { "nvim-telescope/telescope-dap.nvim" }
-        }
-    },
-
     -- Treesitter
     {
         "nvim-treesitter/nvim-treesitter",
