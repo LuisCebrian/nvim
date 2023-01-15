@@ -19,17 +19,6 @@ return require("lazy").setup({
 
     { import = "plugins" },
 
-    -- Treesitter
-    {
-        "nvim-treesitter/nvim-treesitter",
-        build = function()
-            pcall(require("nvim-treesitter.install").update { with_sync = true })
-        end,
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter-textobjects"
-        }
-    },
-
     -- Git
     "tpope/vim-fugitive",
     "lewis6991/gitsigns.nvim",
