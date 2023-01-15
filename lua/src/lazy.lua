@@ -58,12 +58,6 @@ return require("lazy").setup({
         end
     },
 
-    -- LSP: Linter formatters
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-    },
-
     -- Debugging
     {
         "mfussenegger/nvim-dap",
