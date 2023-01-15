@@ -17,6 +17,8 @@ return require("lazy").setup({
     -- Theme
     "folke/tokyonight.nvim",
 
+    { import = "plugins" },
+
     -- Fuzzy finder
     {
         "nvim-telescope/telescope.nvim",
@@ -41,14 +43,6 @@ return require("lazy").setup({
     -- Git
     "tpope/vim-fugitive",
     "lewis6991/gitsigns.nvim",
-
-    -- Tree view
-    {
-        "nvim-tree/nvim-tree.lua",
-        dependencies = {
-            "nvim-tree/nvim-web-devicons", -- for file icons
-        },
-    },
 
     -- Tmux
     "christoomey/vim-tmux-navigator",
@@ -112,7 +106,7 @@ return require("lazy").setup({
     },
     {
         'j-hui/fidget.nvim',
-        config = function () require("fidget").setup() end
+        config = function() require("fidget").setup() end
     },
 
     -- LSP: Linter formatters
@@ -146,4 +140,11 @@ return require("lazy").setup({
         end,
     }
 
+}, {
+    ui = {
+        border = "single"
+    },
+    change_detection = {
+        enabled = false
+    }
 })
