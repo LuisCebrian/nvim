@@ -70,7 +70,6 @@ return require("lazy").setup({
         "nvim-lualine/lualine.nvim",
         dependencies = {
             { "nvim-tree/nvim-web-devicons", lazy = true },
-            { "arkav/lualine-lsp-progress" },
         }
     },
 
@@ -110,6 +109,10 @@ return require("lazy").setup({
             -- Snippets
             { "L3MON4D3/LuaSnip" }
         }
+    },
+    {
+        'j-hui/fidget.nvim',
+        config = function () require("fidget").setup() end
     },
 
     -- LSP: Linter formatters
