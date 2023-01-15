@@ -14,9 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
 
-    -- Theme
-    "folke/tokyonight.nvim",
-
     { import = "plugins" },
 
     -- Git
