@@ -58,11 +58,6 @@ return require("lazy").setup({
         end
     },
 
-    {
-        'j-hui/fidget.nvim',
-        config = function() require("fidget").setup() end
-    },
-
     -- LSP: Linter formatters
     {
         "jose-elias-alvarez/null-ls.nvim",
