@@ -47,7 +47,6 @@ return require("lazy").setup({
     "phaazon/hop.nvim",
     "tpope/vim-surround",
     "tpope/vim-abolish",
-    "tpope/vim-unimpaired",
     "windwp/nvim-autopairs",
 
     -- Comments
