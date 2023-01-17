@@ -29,6 +29,18 @@ return {
                     prompt_title = 'Buffers',
                     show_all_buffers = true
                 },
+                lsp_definitions = {
+                    theme = "dropdown",
+                },
+                lsp_declarations = {
+                    theme = "dropdown",
+                },
+                lsp_references = {
+                    theme = "dropdown",
+                },
+                lsp_implementations = {
+                    theme = "dropdown",
+                },
                 lsp_document_symbols = {
                     theme = "dropdown",
                     previewer = false,
@@ -55,6 +67,11 @@ return {
                 },
                 git_branches = {
                     theme = "dropdown",
+                    mappings = {
+                        i = {
+                            ["<C-b>"] = "git_create_branch"
+                        }
+                    }
                 }
             },
             extensions = {
