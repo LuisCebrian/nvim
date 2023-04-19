@@ -3,6 +3,7 @@ import json
 import os
 import time
 import uuid
+from pathlib import Path
 
 import requests
 import vim
@@ -171,6 +172,26 @@ def previewData():
     command = f"bq query --use_legacy_sql=false --dry_run < {TMP_FILE}"
     output = os.popen(command).read()
     return output
+
+
+def generateDocs():
+    filepath = vim.current.buffer.name
+    yaml_filepath = filepath.replace(".sql", ".yml")
+
+    if os.path.isfile(yaml_filepath):
+        return f"File already exists {yaml_filepath}"
+
+    model_name = Path(filepath).stem
+    cmd_models = json.dumps({"model_names": [model_name]})
+
+    command = f"dbt run-operation generate_model_yaml --args '{cmd_models}'"
+
+    output = os.popen(command).read()
+    yaml_content = output[output.index("version: 2"):]
+
+    with open(yaml_filepath, "w") as f:
+        f.write(yaml_content)
+    return yaml_filepath
 
 
 def getCompiledSqlSafe():

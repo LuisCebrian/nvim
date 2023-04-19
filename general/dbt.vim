@@ -151,6 +151,20 @@ function! DbtCheckSql()
     call s:ErrMsg(l:output)
 endfunction
 
+function! GenerateDbtDocFile()
+    let l:output = substitute(trim(execute("python3 print(generateDocs())")), '\%x00', " ", "")
+    if l:output =~# '^File already'
+        call s:WarnMsg(l:output)
+        return
+    endif
+    execute 'edit' l:output
+endfunction
+
+function! DbtCurrentFile(method)
+    let l:modelName = expand('%:t:r')
+    execute 'Dbt ' . a:method . ' -s ' . l:modelName
+endfunction
+
 " Commands
 command! -nargs=1 Dbt :call DbtCommand(<q-args>)
 command! -count=0 DbtRunSql :call DbtRunSql(<count>)
@@ -160,14 +174,15 @@ command! DbtRestartRpcServer :python3 restartRpcServer()
 command! DbtOpenDocFile :call FindDbtDocumentation()
 command! DbtOpenSourceFile :call OpenMirrorFile('sql')
 command! DbtOpenAltFile :call OpenAltFile()
+command! DbtGenerateDocFile :call GenerateDbtDocFile()
 
 " Mappings
 nnoremap <leader>bq :DbtRunSql<CR>
 nnoremap <leader>bc :DbtCompileSql<CR>
 nnoremap <leader>bp :DbtCheckSql<CR>
 nnoremap <leader>ba :DbtOpenAltFile<CR>
-nnoremap <leader>bt :Dbt test -m %<CR>
-nnoremap <leader>br :Dbt run -m %<CR>
+nnoremap <leader>bt :call DbtCurrentFile('test')<CR>
+nnoremap <leader>br :call DbtCurrentFile('run')<CR>
 
 if g:isDbtProject
     autocmd FocusGained,BufWritePost *.sql,*.yml,*.csv :DbtRestartRpcServer
