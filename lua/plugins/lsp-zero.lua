@@ -158,7 +158,7 @@ return {
             })
 
             -- Prevent lua server from asking for server configuration confirmation
-            lsp.use('sumneko_lua', { settings = { Lua = { workspace = { checkThirdParty = false } } } }, true)
+            lsp.use('lua_ls', { settings = { Lua = { workspace = { checkThirdParty = false } } } }, true)
 
             lsp.setup()
 

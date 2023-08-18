@@ -32,6 +32,7 @@ return {
                 dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 
                 vim.keymap.set("n", "<A-1>", dapui.close)
+                vim.keymap.set({ "v", "n" }, "<leader>dv", dapui.eval)
             end
         },
         {
