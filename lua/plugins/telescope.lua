@@ -88,6 +88,9 @@ return {
                         }
                     },
                     theme = "dropdown"
+                },
+                projects = {
+                    sync_with_nvim_tree = true
                 }
             }
         }

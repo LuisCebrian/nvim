@@ -1,5 +1,6 @@
 return {
     'j-hui/fidget.nvim',
-    event = "BufReadPost",
+    tag = "legacy",
+    event = "LspAttach",
     config = true
 }

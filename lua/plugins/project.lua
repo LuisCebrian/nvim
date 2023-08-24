@@ -1,6 +1,6 @@
 return {
     "ahmedkhalf/project.nvim",
-    event = "VimEnter",
+    event = "VeryLazy",
     config = function()
         require("project_nvim").setup {
             scope_chdir = 'tab',

@@ -1,5 +1,7 @@
 return {
     "nvim-neotest/neotest",
+    ft = "python",
+    event = "VeryLazy",
     config = function()
         local neotest = require("neotest")
         neotest.setup({

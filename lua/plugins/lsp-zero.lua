@@ -1,6 +1,6 @@
 return {
         "VonHeikemen/lsp-zero.nvim",
-        event = "BufReadPost",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             -- LSP Support
             { "neovim/nvim-lspconfig" },
