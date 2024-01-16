@@ -27,12 +27,48 @@ return {
 
                 dapui.setup({
                     icons = { expanded = "", collapsed = "", current_frame = "" },
+                    layouts = {
+                        {
+                            elements = { {
+                                id = "breakpoints",
+                                size = 0.5
+                            }, {
+                                id = "stacks",
+                                size = 0.5
+                            } },
+                            position = "left",
+                            size = 40
+                        }, {
+                            elements = { {
+                                id = "repl",
+                                size = 0.5
+                            }, {
+                                id = "console",
+                                size = 0.5
+                            } },
+                            position = "bottom",
+                            size = 20
+                        },
+                        {
+                            elements = { {
+                                id = "scopes",
+                                size = 0.75
+                            }, {
+                                id = "watches",
+                                size = 0.25
+                            } },
+                            position = "right",
+                            size = 70
+                        }
+
+                    }
                 })
 
                 dap.listeners.after.event_initialized["dapui_config"] = dapui.open
 
                 vim.keymap.set("n", "<A-1>", dapui.close)
                 vim.keymap.set({ "v", "n" }, "<leader>dv", dapui.eval)
+                vim.keymap.set("n", "<leader>dr", function() dapui.open({ reset = true }) end)
             end
         },
         {

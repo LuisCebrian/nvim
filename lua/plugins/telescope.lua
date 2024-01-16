@@ -57,7 +57,8 @@ return {
                 git_files = {
                     theme = "dropdown",
                     previewer = false,
-                    prompt_title = 'Project Files'
+                    prompt_title = 'Project Files',
+                    show_untracked = true
                 },
                 find_files = {
                     theme = "dropdown",
@@ -99,6 +100,20 @@ return {
         telescope.load_extension('dap')
         telescope.load_extension('projects')
 
+        function SearchClass()
+            builtin.lsp_dynamic_workspace_symbols({ prompt_title = "Classes", symbols = { "class" } })
+        end
+
+        function ProjectFiles()
+            local opts = {} -- define here if you want to define something
+            vim.fn.system("git rev-parse --is-inside-work-tree")
+            if vim.v.shell_error == 0 then
+                builtin.git_files(opts)
+            else
+                builtin.find_files(opts)
+            end
+        end
+
         vim.keymap.set('n', '<leader>ff', builtin.lsp_document_symbols, {})
         vim.keymap.set('n', '<leader>fn', builtin.lsp_dynamic_workspace_symbols, {})
         vim.keymap.set('n', '<leader>fg', telescope.extensions.live_grep_args.live_grep_args, {})
@@ -106,8 +121,8 @@ return {
         vim.keymap.set('n', '<leader>fc', builtin.command_history, {})
         vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>ft', builtin.git_branches, {})
-        vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-        vim.keymap.set('n', '<leader>fd', builtin.find_files, {})
+        vim.keymap.set('n', '<C-p>', ProjectFiles, {})
+        vim.keymap.set('n', '<C-n>', SearchClass, {})
 
         local theme = require('telescope.themes').get_dropdown()
         vim.keymap.set('n', '<leader>dp', function() telescope.extensions.dap.list_breakpoints(theme) end, {})

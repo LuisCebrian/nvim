@@ -4,7 +4,7 @@ return {
     event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     config = function()
         require('venv-selector').setup({
-            dap_enabled = true,
+            -- dap_enabled = true,
             name = { "venv", ".env" },
             fd_binary_name = "fdfind"
         })
@@ -17,7 +17,7 @@ return {
             group = group,
             callback = function()
                 -- If there is a venv active, dont load it again
-                if require('venv-selector').get_active_venv() == nil then
+                if require('venv-selector').get_active_venv() == nil and os.getenv("VIRTUAL_ENV") == "" then
                     -- Defer the callback to give some time to the diagnostics to detect the new environment
                     vim.defer_fn(require("venv-selector").retrieve_from_cache, 2000)
                 end
