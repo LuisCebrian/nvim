@@ -36,6 +36,9 @@ return {
                         ['ic'] = '@class.inner',
                         ['al'] = '@loop.outer',
                         ['il'] = '@loop.inner',
+                        ['as'] = '@statement.outer',
+                        ['ab'] = '@block.outer',
+                        ['ib'] = '@block.inner',
                     },
                 },
                 move = {
