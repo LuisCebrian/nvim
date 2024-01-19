@@ -1,7 +1,7 @@
 return {
     "lewis6991/gitsigns.nvim",
-    event = "VeryLazy",
-    config = function ()
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    config = function()
         require('gitsigns').setup {
             on_attach = function(bufnr)
                 local gs = package.loaded.gitsigns

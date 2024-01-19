@@ -1,10 +1,15 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    event = "VeryLazy",
+    version = "*",
+    lazy = false,
     dependencies = {
         "nvim-tree/nvim-web-devicons", -- for file icons
     },
     config = function()
+        -- disable netrw
+        vim.g.loaded_netrw = 1
+        vim.g.loaded_netrwPlugin = 1
+
         require 'nvim-tree'.setup {
             sync_root_with_cwd = true,
             respect_buf_cwd = true,

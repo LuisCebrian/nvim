@@ -93,6 +93,22 @@ return {
                         })[entry.source.name]
                         return vim_item
                     end
+                },
+                sources = {
+                    {
+                        name = "path"
+                    },
+                    {
+                        name = "nvim_lsp"
+                    },
+                    {
+                        keyword_length = 2,
+                        name = "luasnip"
+                    },
+                    {
+                        keyword_length = 3,
+                        name = "buffer"
+                    }
                 }
             })
 
