@@ -39,16 +39,16 @@ return {
                             position = "left",
                             size = 40
                         }, {
-                            elements = { {
-                                id = "repl",
-                                size = 0.5
-                            }, {
-                                id = "console",
-                                size = 0.5
-                            } },
-                            position = "bottom",
-                            size = 20
-                        },
+                        elements = { {
+                            id = "repl",
+                            size = 0.5
+                        }, {
+                            id = "console",
+                            size = 0.5
+                        } },
+                        position = "bottom",
+                        size = 20
+                    },
                         {
                             elements = { {
                                 id = "scopes",
@@ -93,6 +93,7 @@ return {
         vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, noremap)
         vim.keymap.set("n", "<leader>dB", conditionalBreakpoint, noremap)
         vim.keymap.set("n", "<leader>dl", dap.run_last, noremap)
+        vim.keymap.set("n", "<leader>dt", dap.terminate, noremap)
 
         vim.fn.sign_define("DapBreakpoint", { text = "●", texthl = "ErrorMsg", linehl = "", numhl = "" })
         vim.fn.sign_define("DapBreakpointCondition", { text = "●", texthl = "WarningMsg", linehl = "", numhl = "" })
