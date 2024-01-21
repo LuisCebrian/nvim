@@ -5,6 +5,7 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
+            "folke/neodev.nvim"
         },
         config = function()
             require("mason").setup()
@@ -26,6 +27,8 @@ return {
             end
 
             -- Setup language servers
+            require("neodev").setup() -- Setup lua development config before other lsp
+
             local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
             lspconfig.lua_ls.setup({ capabilities = capabilities })
