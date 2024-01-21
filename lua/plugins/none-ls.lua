@@ -1,11 +1,11 @@
 return {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     event = "LspAttach",
-    enabled = false,
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
         local null_ls = require("null-ls")
         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
         null_ls.setup({
             debug = true,
             diagnostic_config = {
