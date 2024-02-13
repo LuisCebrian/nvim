@@ -162,3 +162,27 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 --------------------------------------
 -- END Resize splits if vim resized --
 --------------------------------------
+
+---------------------------------
+-- Toggle invisible characters --
+---------------------------------
+function ToggleInvisibleChars()
+    if vim.opt_local.listchars:get()["space"] ~= nil then
+        vim.opt_local.listchars = { trail = '·', tab = '»·' }
+    else
+        vim.opt_local.listchars = {
+            trail = '·',
+            tab = '»·',
+            space = '·',
+            nbsp = '␣',
+            eol = '¶',
+            precedes = '«',
+            extends = '»'
+        }
+    end
+end
+
+vim.keymap.set("n", "<F3>", ToggleInvisibleChars)
+-------------------------------------
+-- END Toggle invisible characters --
+-------------------------------------
