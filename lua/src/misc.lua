@@ -2,20 +2,20 @@
 -- QuickFix manipulation --
 ---------------------------
 local function SelectionRange()
-  local _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
-  local _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
-  if csrow < cerow or (csrow == cerow and cscol <= cecol) then
-    return csrow, cscol, cerow, cecol
-  else
-    return cerow, cecol, csrow, cscol
-  end
+    local _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
+    local _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
+    if csrow < cerow or (csrow == cerow and cscol <= cecol) then
+        return csrow, cscol, cerow, cecol
+    else
+        return cerow, cecol, csrow, cscol
+    end
 end
 
 function RemoveQFItem(mode)
     local initr, lastr
 
     if mode == "v" then
-        initr, _, lastr, _  = SelectionRange()
+        initr, _, lastr, _ = SelectionRange()
     else
         local currow = vim.fn.line(".")
         initr = currow
@@ -32,7 +32,7 @@ function RemoveQFItem(mode)
     vim.fn.setqflist({}, "r", { items = qflist })
 
     if #qflist > 0 then
-        vim.fn.setpos(".", {vim.fn.bufnr(), initr, 1, 0})
+        vim.fn.setpos(".", { vim.fn.bufnr(), initr, 1, 0 })
     else
         vim.cmd.cclose()
     end
@@ -45,14 +45,14 @@ vim.api.nvim_create_autocmd("FileType", {
     -- TODO: Find out why this does not work with the callback function
     command = "vnoremap <silent><buffer>d <esc><cmd>lua RemoveQFItem('v')<cr>",
     group = qf_group
-  }
+}
 )
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "qf",
     -- TODO: Find out why this does not work with the callback function
     command = "nnoremap <silent><buffer>dd <esc><cmd>lua RemoveQFItem('n')<cr>",
     group = qf_group
-  }
+}
 )
 
 function ToggleQuickFix()
@@ -76,7 +76,7 @@ vim.keymap.set("n", "<F2>", ToggleQuickFix)
 
 function TrimWhiteSpace()
     local post = vim.fn.winsaveview()
-    vim.cmd[[keeppatterns %s/\s\+$//e]]
+    vim.cmd [[keeppatterns %s/\s\+$//e]]
     vim.fn.winrestview(post)
 end
 
@@ -88,7 +88,7 @@ end
 -- Formatting Options --
 ------------------------
 
-function SetFormatOptions ()
+function SetFormatOptions()
     vim.opt.formatoptions:remove("c")
     vim.opt.formatoptions:remove("r")
     vim.opt.formatoptions:remove("o")
@@ -135,7 +135,6 @@ function SetAutoSave()
     else
         vim.opt.hidden = false
         RemoveAutoSaveCommands(auto_save_group)
-
     end
 end
 
@@ -147,3 +146,19 @@ vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged" },
 -------------------------------
 -- END Auto save on Git repo --
 -------------------------------
+
+----------------------------------
+-- Resize splits if vim resized --
+----------------------------------
+
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+    group = vim.api.nvim_create_augroup("resize_splits", { clear = true }),
+    callback = function()
+        local current_tab = vim.fn.tabpagenr()
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabnext " .. current_tab)
+    end,
+})
+--------------------------------------
+-- END Resize splits if vim resized --
+--------------------------------------
