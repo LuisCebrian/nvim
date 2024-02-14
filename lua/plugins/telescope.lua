@@ -99,6 +99,7 @@ return {
         telescope.load_extension("live_grep_args")
         telescope.load_extension('dap')
         telescope.load_extension('projects')
+        telescope.load_extension('yank_history')
 
         function SearchClass()
             builtin.lsp_dynamic_workspace_symbols({ prompt_title = "Classes", symbols = { "class" } })
@@ -124,8 +125,10 @@ return {
         vim.keymap.set('n', '<C-p>', ProjectFiles, {})
         vim.keymap.set('n', '<C-n>', SearchClass, {})
 
-        local theme = require('telescope.themes').get_dropdown()
-        vim.keymap.set('n', '<leader>dp', function() telescope.extensions.dap.list_breakpoints(theme) end, {})
+        local dropdown = require('telescope.themes').get_dropdown()
+        vim.keymap.set('n', '<leader>p', function() telescope.extensions.yank_history.yank_history(dropdown) end, {})
+
+        vim.keymap.set('n', '<leader>dp', function() telescope.extensions.dap.list_breakpoints(dropdown) end, {})
         vim.keymap.set('n', '<leader>de', telescope.extensions.projects.projects, {})
     end
 }
