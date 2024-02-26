@@ -11,10 +11,18 @@ return {
         local directions = require('hop.hint').HintDirection
 
         -- Cannot be set through vimscript
-        vim.keymap.set('', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, {remap = true})
-        vim.keymap.set('', 'F', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end, {remap = true})
-        vim.keymap.set('', 't', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end, {remap = true})
-        vim.keymap.set('', 'T', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 }) end, {remap = true})
-        vim.keymap.set({'n', 'x'}, 's', hop.hint_char2)
+        vim.keymap.set({ 'n', 'x', 'o' }, 'f',
+            function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end,
+            { remap = true })
+        vim.keymap.set({ 'n', 'x', 'o' }, 'F',
+            function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end,
+            { remap = true })
+        vim.keymap.set({ 'n', 'x', 'o' }, 't',
+            function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true, hint_offset = -1 }) end,
+            { remap = true })
+        vim.keymap.set({ 'n', 'x', 'o' }, 'T',
+            function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true, hint_offset = -1 }) end,
+            { remap = true })
+        vim.keymap.set({ 'n', 'x' }, 's', hop.hint_char2)
     end
 }
