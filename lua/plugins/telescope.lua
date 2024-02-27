@@ -118,7 +118,7 @@ return {
         vim.keymap.set('n', '<leader>ff', builtin.lsp_document_symbols, {})
         vim.keymap.set('n', '<leader>fn', builtin.lsp_dynamic_workspace_symbols, {})
         vim.keymap.set('n', '<leader>fg', telescope.extensions.live_grep_args.live_grep_args, {})
-        vim.keymap.set('n', '<leader>fw', builtin.grep_string, {})
+        vim.keymap.set({ 'n', 'v' }, '<leader>fw', builtin.grep_string, {})
         vim.keymap.set('n', '<leader>fc', builtin.command_history, {})
         vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>ft', builtin.git_branches, {})
