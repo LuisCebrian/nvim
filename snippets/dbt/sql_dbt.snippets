@@ -72,3 +72,12 @@ snippet var
 
 snippet sel
         select ${1:*} from ${2:final}
+
+snippet dedup
+       {{
+           dbt_utils.deduplicate(
+               relation='$1',
+               partition_by='$2',
+               order_by='$3'
+           )
+       }}
