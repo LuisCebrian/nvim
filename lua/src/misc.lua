@@ -186,3 +186,61 @@ vim.keymap.set("n", "<F3>", ToggleInvisibleChars)
 -------------------------------------
 -- END Toggle invisible characters --
 -------------------------------------
+
+---------------------------------
+-- Toggle invisible characters --
+---------------------------------
+function TableToString(table)
+    local result = ""
+
+    for _, line in ipairs(table) do
+        result = result .. line .. "\n"
+    end
+
+    return result
+end
+
+function PrettyBytes(bytes)
+    local sizes = { 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB' }
+    local i = 1
+    while bytes >= 1024 and i < #sizes do
+        bytes = bytes / 1024.0
+        i = i + 1
+    end
+    return bytes > 0 and string.format(' %.1f%s ', bytes, sizes[i]) or ''
+end
+
+function DryRunBigQuery()
+    local fidget = require("fidget")
+
+    local result = ""
+    function OnOut(_, data, _)
+        result = result .. TableToString(data)
+    end
+
+    function OnEnd(jobid, data, event)
+        if data == 0 then
+            local bytes = PrettyBytes(tonumber(string.match(result, '%d+')))
+            fidget.notify(bytes, vim.log.levels.INFO)
+        else
+            fidget.notify(result, vim.log.levels.ERROR)
+        end
+        print(jobid)
+        print(data)
+        print(event)
+    end
+
+    local currentFile = vim.fn.expand("%")
+    local cmd = "bq query --use_legacy_sql=false --dry_run < " .. currentFile
+    vim.fn.jobstart(cmd,
+        {
+            on_stdout = OnOut,
+            on_exit = OnEnd,
+            on_stderr = OnOut
+        }
+    )
+end
+
+-------------------------------------
+-- END Toggle invisible characters --
+-------------------------------------
