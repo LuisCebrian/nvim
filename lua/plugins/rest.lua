@@ -1,13 +1,12 @@
 return {
     "rest-nvim/rest.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
     ft = "http",
     config = function()
-        require("rest-nvim").setup({
+        vim.g.rest_nvim = {
             result = {
-                show_headers = false,
-            }
-        })
+                show_headers = false
+            },
+        }
 
         function SetupKeymaps()
             -- TODO: figure out how to make this command work: vim.keymap.set('n', '<c-cr>', '<Plug>RestNvim', {})
