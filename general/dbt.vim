@@ -186,7 +186,5 @@ nnoremap <leader>br :call DbtCurrentFile('run')<CR>
 
 if g:isDbtProject
     autocmd FocusGained,BufWritePost *.sql,*.yml,*.csv :DbtRestartRpcServer
-    autocmd BufNewFile,BufRead *.sql set filetype=dbt syntax=dbt
-    autocmd BufNewFile,BufRead *.sql set suffixesadd+=.sql
     autocmd VimEnter * :call SpinUpDbtServer()
 endif
