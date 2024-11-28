@@ -91,7 +91,7 @@ function! s:ErrMsg(msg)
 endfunc
 
 function! s:onError(job_id, data, event)
-    call s:WarnMsg('Dbt rpc sever is not running')
+    call s:WarnMsg('Dbt rpc sever is not running'.. join(a:data, ' '))
 endfunc
 
 function! SpinUpDbtServer()
