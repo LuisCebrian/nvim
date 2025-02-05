@@ -1,5 +1,0 @@
-pynvim
-requests
-black
-flake8
-isort

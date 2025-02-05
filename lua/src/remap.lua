@@ -22,3 +22,6 @@ vim.keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
 -- Copy file name
 vim.keymap.set("n", "cp", ":let @+ = expand(\"%:t:r\")<cr>")
+
+-- Exit insert mode in terminal with C-e
+vim.keymap.set('t', '<C-e>', '<C-\\><C-n>', { noremap = true, silent = true })
