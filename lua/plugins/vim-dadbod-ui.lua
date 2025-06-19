@@ -67,10 +67,6 @@ return {
             )
         end
 
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = "sql",
-            command = "autocmd InsertLeave <buffer> lua DryRunBigQuery()",
-            group = vim.api.nvim_create_augroup("DadbodSqlPreview", { clear = true })
-        })
+        vim.api.nvim_create_user_command("DryRunBigQuery", DryRunBigQuery, {})
     end
 }

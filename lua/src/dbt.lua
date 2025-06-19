@@ -166,3 +166,12 @@ vim.keymap.set('n', '<leader>br', dbtRun, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>bt', dbtTest, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>bq', dbtQuery, { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>ba', openAltFile, { noremap = true, silent = true })
+
+-- Parse a dbt log, extract the creation times of the models and sort them from highest to lowest creation time.
+local function filterDBTLog()
+    vim.cmd([[v/OK created sql/d]])
+    vim.cmd([[%s/.*model\s\+\(\S\+\).*in \([0-9]\+\(\.[0-9]\+\)\?\)s\].*/\1,\2]])
+    vim.cmd([[ %sort! n /,\zs/ ]])
+end
+
+vim.api.nvim_create_user_command("DbtCleanLogs", filterDBTLog, {})
