@@ -1,8 +1,8 @@
 vim.g.mapleader = " "
 
 -- Better horizontal scroll
-vim.keymap.set("n", "<C-A-L>", "5zl")
-vim.keymap.set("n", "<C-A-H>", "5zh")
+vim.keymap.set("n", "<C-]>", "5zl")
+vim.keymap.set("n", "<C-[>", "5zh")
 
 --Better indentation
 vim.keymap.set("v", "<", "<gv")
@@ -25,3 +25,18 @@ vim.keymap.set("n", "cp", ":let @+ = expand(\"%:t:r\")<cr>")
 
 -- Exit insert mode in terminal with C-e
 vim.keymap.set('t', '<C-e>', '<C-\\><C-n>', { noremap = true, silent = true })
+
+-- Transform selected text to markdown link in visual mode
+vim.keymap.set('v', '<C-k>', function()
+    vim.cmd('normal! "vy')
+    local selected_text = vim.fn.getreg('v')
+
+    local markdown_link = '[' .. selected_text .. ']()'
+
+    vim.cmd('normal! gv')
+    vim.cmd('normal! c' .. markdown_link)
+
+    vim.cmd('normal! F(')
+    vim.cmd('normal! l')
+    vim.cmd('startinsert')
+end, { desc = "Transform selection to markdown link" })
