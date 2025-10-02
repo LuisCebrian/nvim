@@ -23,7 +23,7 @@ local function dbtCompile()
     local file = vim.api.nvim_buf_get_name(0)
     local rel_path = vim.fn.fnamemodify(file, ':.') -- ej: models/my_model.sql
 
-    local compile_cmd = "dbt compile --no-use-colors --warn-error -s path:" .. rel_path
+    local compile_cmd = "dbt compile --warn-error -s path:" .. rel_path
     local compile_output = vim.fn.systemlist(compile_cmd)
 
     local exit_code = vim.v.shell_error
