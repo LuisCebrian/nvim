@@ -13,25 +13,24 @@ return {
                 automatic_installation = true
             })
 
-            -- Setup
-            local signs = {
-                Error = "",
-                Warn  = "",
-                Hint  = "",
-                Info  = "",
-            }
-
-            for type, icon in pairs(signs) do
-                local hl = "DiagnosticSign" .. type
-                vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-            end
+            vim.diagnostic.config({
+                signs = {
+                    text = {
+                        [vim.diagnostic.severity.ERROR] = "",
+                        [vim.diagnostic.severity.WARN] = "",
+                        [vim.diagnostic.severity.HINT] = "",
+                        [vim.diagnostic.severity.INFO] = "",
+                    }
+                }
+            })
 
             -- Setup language servers
             require("neodev").setup() -- Setup lua development config before other lsp
 
-            local lspconfig = require("lspconfig")
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
-            lspconfig.lua_ls.setup({
+
+            -- Configure LSP servers using the new vim.lsp.config API
+            vim.lsp.config.lua_ls = {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -40,12 +39,21 @@ return {
                         }
                     }
                 }
-            })
-            lspconfig.pyright.setup({ capabilities = capabilities })
-            lspconfig.dockerls.setup({ capabilities = capabilities })
-            lspconfig.jsonls.setup({ capabilities = capabilities })
-            lspconfig.vimls.setup({ capabilities = capabilities })
-            lspconfig.yamlls.setup({ capabilities = capabilities })
+            }
+
+            vim.lsp.config.pyright = { capabilities = capabilities }
+            vim.lsp.config.dockerls = { capabilities = capabilities }
+            vim.lsp.config.jsonls = { capabilities = capabilities }
+            vim.lsp.config.vimls = { capabilities = capabilities }
+            vim.lsp.config.yamlls = { capabilities = capabilities }
+
+            -- Enable LSP servers
+            vim.lsp.enable('lua_ls')
+            vim.lsp.enable('pyright')
+            vim.lsp.enable('dockerls')
+            vim.lsp.enable('jsonls')
+            vim.lsp.enable('vimls')
+            vim.lsp.enable('yamlls')
 
             -- Setup lsp-related mappings
             vim.api.nvim_create_autocmd('LspAttach', {
