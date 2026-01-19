@@ -1,5 +1,3 @@
-local projectName = string.gsub(vim.fn.system("yq -r '.name' dbt_project.yml"), "\n$", "")
-
 local function openBotRightWindow(lines, ft)
     vim.cmd('botright new')
 
@@ -16,6 +14,7 @@ local function openBotRightWindow(lines, ft)
 end
 
 local function getCompilePath(rel_path)
+    local projectName = string.gsub(vim.fn.system("yq -r '.name' dbt_project.yml"), "\n$", "")
     return "target/compiled/" .. projectName .. "/" .. rel_path
 end
 
