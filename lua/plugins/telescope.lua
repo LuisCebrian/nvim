@@ -58,15 +58,24 @@ return {
                     theme = "dropdown",
                     previewer = false,
                     prompt_title = 'Project Files',
-                    show_untracked = true
+                    show_untracked = true,
+                    layout_config = {
+                        width = 0.7
+                    },
                 },
                 find_files = {
                     theme = "dropdown",
                     previewer = false,
-                    prompt_title = 'Find Files'
+                    prompt_title = 'Find Files',
+                    layout_config = {
+                        width = 0.7
+                    },
                 },
                 grep_string = {
                     theme = "dropdown",
+                    layout_config = {
+                        width = 0.7
+                    },
                 },
                 command_history = {
                     theme = "dropdown",
@@ -88,7 +97,10 @@ return {
                             ["<C-k>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
                         }
                     },
-                    theme = "dropdown"
+                    theme = "dropdown",
+                    layout_config = {
+                        width = 0.7
+                    },
                 },
                 projects = {
                     sync_with_nvim_tree = true
@@ -122,6 +134,7 @@ return {
         vim.keymap.set('n', '<leader>fc', builtin.command_history, {})
         vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
         vim.keymap.set('n', '<leader>ft', builtin.git_branches, {})
+        vim.keymap.set('n', '<leader>fr', builtin.resume, {})
         vim.keymap.set('n', '<C-p>', ProjectFiles, {})
         vim.keymap.set('n', '<C-n>', SearchClass, {})
 
