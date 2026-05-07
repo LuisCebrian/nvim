@@ -54,7 +54,7 @@ local function dbtTerminal(dbt_cmd)
     -- Abre una split abajo y arranca termopen con tu comando
     vim.cmd("botright new")
 
-    vim.fn.termopen(cmd)
+    vim.fn.jobstart(cmd, { term = true })
     vim.cmd("startinsert")
 end
 
@@ -94,7 +94,7 @@ local function dbtCommand(args)
     -- Create new split window with height 25
     vim.cmd('25new')
     -- Open terminal with dbt command
-    vim.fn.termopen('dbt ' .. args)
+    vim.fn.jobstart('dbt ' .. args, { term = true })
     vim.cmd("startinsert")
 end
 

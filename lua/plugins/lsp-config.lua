@@ -5,7 +5,7 @@ return {
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
-            "folke/neodev.nvim"
+            { "folke/lazydev.nvim", ft = "lua", opts = {} },
         },
         config = function()
             require("mason").setup()
@@ -23,9 +23,6 @@ return {
                     }
                 }
             })
-
-            -- Setup language servers
-            require("neodev").setup() -- Setup lua development config before other lsp
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
 

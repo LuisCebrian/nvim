@@ -1,170 +1,148 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    event = "BufReadPost",
-    build = function()
-        pcall(require("nvim-treesitter.install").update { with_sync = true })
-    end,
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects"
-    },
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter").setup({})
 
-    config = function()
-        require 'nvim-treesitter.configs'.setup {
-            ensure_installed = {
-                "angular",
-                "asm",
-                "awk",
+            require("nvim-treesitter").install({
                 "bash",
                 "c",
-                "c_sharp",
-                "cmake",
-                "comment",
-                "commonlisp",
-                "cpp",
                 "css",
                 "csv",
-                "cue",
-                "d",
-                "dart",
                 "diff",
                 "dockerfile",
-                "dot",
-                "doxygen",
-                "fish",
                 "git_config",
                 "git_rebase",
                 "gitcommit",
                 "gitignore",
                 "go",
-                "goctl",
-                "gomod",
-                "gosum",
-                "gotmpl",
-                "gowork",
                 "graphql",
-                "haskell",
-                "haskell_persistent",
                 "hcl",
-                "helm",
                 "html",
-                "htmldjango",
-                "http",
-                "ini",
                 "java",
-                "javadoc",
                 "javascript",
                 "jinja",
                 "jinja_inline",
                 "jq",
                 "json",
-                "json5",
-                "jsonnet",
-                "julia",
-                "kotlin",
                 "lua",
-                "luadoc",
-                "luau",
                 "make",
                 "markdown",
                 "markdown_inline",
-                "mermaid",
-                "nginx",
-                "nickel",
-                "objc",
-                "passwd",
-                "perl",
-                "php",
-                "php_only",
-                "phpdoc",
-                "promql",
-                "proto",
                 "python",
-                "r",
-                "readline",
                 "regex",
-                "rego",
-                "rst",
                 "ruby",
-                "runescript",
                 "rust",
-                "scala",
-                "scheme",
-                "scss",
                 "sql",
                 "ssh_config",
                 "terraform",
                 "tmux",
                 "toml",
-                "tsv",
                 "typescript",
-                "typespec",
-                "typoscript",
-                "udev",
                 "vim",
                 "vimdoc",
-                "vue",
                 "xml",
                 "yaml",
-            },
-            highlight = {
-                enable = true, -- false will disable the whole extension
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = '<c-space>',
-                    node_incremental = '<c-space>',
-                },
-            },
-            textobjects = {
+            })
+
+            vim.api.nvim_create_autocmd("FileType", {
+                callback = function()
+                    pcall(vim.treesitter.start)
+                end,
+            })
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        branch = "main",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        config = function()
+            require("nvim-treesitter-textobjects").setup({
                 select = {
-                    enable = true,
-                    lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                    keymaps = {
-                        -- You can use the capture groups defined in textobjects.scm
-                        ['aa'] = '@parameter.outer',
-                        ['ia'] = '@parameter.inner',
-                        ['af'] = '@function.outer',
-                        ['if'] = '@function.inner',
-                        ['ac'] = '@class.outer',
-                        ['ic'] = '@class.inner',
-                        ['al'] = '@loop.outer',
-                        ['il'] = '@loop.inner',
-                        ['as'] = '@statement.outer',
-                        ['ab'] = '@block.outer',
-                        ['ib'] = '@block.inner',
-                    },
+                    lookahead = true,
                 },
                 move = {
-                    enable = true,
-                    set_jumps = true, -- whether to set jumps in the jumplist
-                    goto_next_start = {
-                        [']m'] = '@function.outer',
-                        [']]'] = '@parameter.inner',
-                    },
-                    goto_next_end = {
-                        [']M'] = '@function.outer',
-                        [']['] = '@parameter.inner',
-                    },
-                    goto_previous_start = {
-                        ['[m'] = '@function.outer',
-                        ['[['] = '@parameter.inner',
-                    },
-                    goto_previous_end = {
-                        ['[M'] = '@function.outer',
-                        ['[]'] = '@parameter.inner',
-                    },
+                    set_jumps = true,
                 },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ['<leader>a'] = '@parameter.inner',
-                    },
-                    swap_previous = {
-                        ['<leader>A'] = '@parameter.inner',
-                    },
-                },
-            },
-        }
-    end
+            })
+
+            local select = require("nvim-treesitter-textobjects.select")
+            local move = require("nvim-treesitter-textobjects.move")
+            local swap = require("nvim-treesitter-textobjects.swap")
+
+            -- Select
+            for _, mode in ipairs({ "x", "o" }) do
+                vim.keymap.set(mode, "aa", function()
+                    select.select_textobject("@parameter.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "ia", function()
+                    select.select_textobject("@parameter.inner", "textobjects")
+                end)
+                vim.keymap.set(mode, "af", function()
+                    select.select_textobject("@function.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "if", function()
+                    select.select_textobject("@function.inner", "textobjects")
+                end)
+                vim.keymap.set(mode, "ac", function()
+                    select.select_textobject("@class.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "ic", function()
+                    select.select_textobject("@class.inner", "textobjects")
+                end)
+                vim.keymap.set(mode, "al", function()
+                    select.select_textobject("@loop.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "il", function()
+                    select.select_textobject("@loop.inner", "textobjects")
+                end)
+                vim.keymap.set(mode, "as", function()
+                    select.select_textobject("@statement.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "ab", function()
+                    select.select_textobject("@block.outer", "textobjects")
+                end)
+                vim.keymap.set(mode, "ib", function()
+                    select.select_textobject("@block.inner", "textobjects")
+                end)
+            end
+
+            -- Move
+            vim.keymap.set({ "n", "x", "o" }, "]m", function()
+                move.goto_next_start("@function.outer", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "]]", function()
+                move.goto_next_start("@parameter.inner", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "]M", function()
+                move.goto_next_end("@function.outer", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "][", function()
+                move.goto_next_end("@parameter.inner", "textobjects")
+            end)
+            vim.keymap.set({ "x", "n", "o" }, "[m", function()
+                move.goto_previous_start("@function.outer", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "[[", function()
+                move.goto_previous_start("@parameter.inner", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "[M", function()
+                move.goto_previous_end("@function.outer", "textobjects")
+            end)
+            vim.keymap.set({ "n", "x", "o" }, "[]", function()
+                move.goto_previous_end("@parameter.inner", "textobjects")
+            end)
+
+            -- Swap
+            vim.keymap.set("n", "<leader>a", function()
+                swap.swap_next("@parameter.inner")
+            end)
+            vim.keymap.set("n", "<leader>A", function()
+                swap.swap_previous("@parameter.inner")
+            end)
+        end,
+    },
 }
