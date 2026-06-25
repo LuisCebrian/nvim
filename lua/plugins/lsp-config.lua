@@ -39,6 +39,22 @@ return {
             }
 
             vim.lsp.config.pyright = { capabilities = capabilities }
+            vim.lsp.config.ruff = {
+                capabilities = capabilities,
+                on_attach = function(client, bufnr)
+                    -- Format + fix imports on save
+                    vim.api.nvim_create_autocmd("BufWritePre", {
+                        buffer = bufnr,
+                        callback = function()
+                            vim.lsp.buf.format({ bufnr = bufnr })
+                            vim.lsp.buf.code_action({
+                                context = { only = { "source.organizeImports" } },
+                                apply = true
+                            })
+                        end
+                    })
+                end
+            }
             vim.lsp.config.dockerls = { capabilities = capabilities }
             vim.lsp.config.jsonls = { capabilities = capabilities }
             vim.lsp.config.vimls = { capabilities = capabilities }
@@ -47,6 +63,7 @@ return {
             -- Enable LSP servers
             vim.lsp.enable('lua_ls')
             vim.lsp.enable('pyright')
+            vim.lsp.enable("ruff")
             vim.lsp.enable('dockerls')
             vim.lsp.enable('jsonls')
             vim.lsp.enable('vimls')
@@ -56,7 +73,23 @@ return {
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
                 callback = function(ev)
+                    local client = vim.lsp.get_client_by_id(ev.data.client_id)
                     local noremap = { buffer = ev.buf, remap = false, silent = true }
+
+                    -- Document highlight on cursor hold
+                    if client and client:supports_method("textDocument/documentHighlight") then
+                        local hl_group = vim.api.nvim_create_augroup("UserLspHighlight", { clear = false })
+                        vim.api.nvim_create_autocmd("CursorHold", {
+                            buffer = ev.buf,
+                            group = hl_group,
+                            callback = vim.lsp.buf.document_highlight,
+                        })
+                        vim.api.nvim_create_autocmd("CursorMoved", {
+                            buffer = ev.buf,
+                            group = hl_group,
+                            callback = vim.lsp.buf.clear_references,
+                        })
+                    end
                     vim.keymap.set('n', 'gd', "<cmd>Telescope lsp_definitions<cr>", noremap)
                     vim.keymap.set('n', 'gD', "<cmd>Telescope lsp_declarations<cr>", noremap)
                     vim.keymap.set('n', 'gr', "<cmd>Telescope lsp_references<cr>", noremap)

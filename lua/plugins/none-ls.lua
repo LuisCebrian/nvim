@@ -14,12 +14,6 @@ return {
                 }
             },
             sources = {
-                -- Python
-                null_ls.builtins.formatting.isort,
-                null_ls.builtins.formatting.black,
-                -- null_ls.builtins.diagnostics.flake8.with({
-                --     extra_args = { "--max-line-length=100" },
-                -- }),
                 -- Lua
                 null_ls.builtins.formatting.stylua.with({
                     extra_args = { "--indent-width", "Spaces" }
