@@ -38,7 +38,7 @@ return {
                 }
             }
 
-            vim.lsp.config.pyright = { capabilities = capabilities }
+            vim.lsp.config.basedpyright = { capabilities = capabilities }
             vim.lsp.config.ruff = {
                 capabilities = capabilities,
                 on_attach = function(client, bufnr)
@@ -62,7 +62,7 @@ return {
 
             -- Enable LSP servers
             vim.lsp.enable('lua_ls')
-            vim.lsp.enable('pyright')
+            vim.lsp.enable('basedpyright')
             vim.lsp.enable("ruff")
             vim.lsp.enable('dockerls')
             vim.lsp.enable('jsonls')
