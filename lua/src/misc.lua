@@ -190,7 +190,7 @@ vim.keymap.set("n", "<F3>", ToggleInvisibleChars)
 ---------------------------------
 -- Toggle invisible characters --
 ---------------------------------
-function TableToString(table)
+local function TableToString(table)
     local result = ""
 
     for _, line in ipairs(table) do
@@ -200,7 +200,7 @@ function TableToString(table)
     return result
 end
 
-function PrettyBytes(bytes)
+local function PrettyBytes(bytes)
     local sizes = { 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB' }
     local i = 1
     while bytes >= 1024 and i < #sizes do
@@ -210,15 +210,15 @@ function PrettyBytes(bytes)
     return bytes > 0 and string.format(' %.1f%s ', bytes, sizes[i]) or ''
 end
 
-function DryRunBigQuery()
+local function DryRunBigQuery()
     local fidget = require("fidget")
 
     local result = ""
-    function OnOut(_, data, _)
+    local function OnOut(_, data, _)
         result = result .. TableToString(data)
     end
 
-    function OnEnd(jobid, data, event)
+    local function OnEnd(jobid, data, event)
         if data == 0 then
             local bytes = PrettyBytes(tonumber(string.match(result, '%d+')))
             fidget.notify(bytes, vim.log.levels.INFO)

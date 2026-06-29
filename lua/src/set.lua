@@ -12,7 +12,6 @@ vim.opt.relativenumber = true
 vim.opt.wrap = false
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.autoindent = true
 vim.opt.incsearch = true
 vim.opt.showmatch = true
 vim.opt.cursorline = true

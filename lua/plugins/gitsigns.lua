@@ -27,7 +27,6 @@ return {
 
                 -- Actions
                 map({ 'n', 'v' }, '<leader>hu', ':Gitsigns reset_hunk<CR>')
-                map('n', '<leader>hu', gs.reset_hunk)
                 map('n', '<leader>hp', gs.preview_hunk)
                 map('n', '<leader>hq', gs.setqflist)
             end

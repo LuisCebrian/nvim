@@ -7,7 +7,6 @@ return {
         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
         null_ls.setup({
-            debug = true,
             diagnostic_config = {
                 signs = {
                     priority = 9 -- Less than 10 so that breakpoints show above diagnostics

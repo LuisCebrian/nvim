@@ -1,6 +1,6 @@
 return {
-    'j-hui/fidget.nvim',
-    tag = "v1.4.0",
+    "j-hui/fidget.nvim",
+    tag = "v2.0.0",
     event = "LspAttach",
-    config = true
+    config = true,
 }
